@@ -89,9 +89,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun SomeLayout(name: String, modifier: Modifier = Modifier) {
-    Column() {
+    Column(modifier = Modifier.background(Color.Cyan)) {
 
-        Row(modifier = Modifier.background(Color.Cyan).fillMaxWidth(1.0f), verticalAlignment = Alignment.CenterVertically) {
+        Row(modifier = Modifier.fillMaxWidth(1.0f), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = "Dupa $name!",
                 modifier = modifier
@@ -99,7 +99,7 @@ fun SomeLayout(name: String, modifier: Modifier = Modifier) {
             Box(modifier = Modifier.width(32.dp).height(32.dp).background(Color(200,240,200)))
 
         }
-        HorizontalDivider(thickness = 1.dp, color = Color.Red)
+        HorizontalDivider(modifier = Modifier.padding(start = 12.dp),thickness = 1.dp,  color = Color.Red)
     }
 }
 @Preview(showBackground = true)
