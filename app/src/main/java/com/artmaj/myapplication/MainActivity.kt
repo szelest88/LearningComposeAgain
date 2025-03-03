@@ -24,6 +24,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
@@ -90,7 +91,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun SomeLayout(name: String, modifier: Modifier = Modifier) {
     Column() {
 
-        Row(modifier = Modifier.background(Color.Cyan).fillMaxWidth(1.0f)) {
+        Row(modifier = Modifier.background(Color.Cyan).fillMaxWidth(1.0f), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = "Dupa $name!",
                 modifier = modifier
