@@ -53,68 +53,86 @@ class MainActivity : ComponentActivity() {
         val bookND2 = BookNonData("LOTR", "Tolkien", BookCondition.NEW)
         setContent {
             MyApplicationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
-                    LazyColumn(
-                        modifier = Modifier.nestedScroll(connection)
-                            .fillMaxSize()
-                        //    .verticalScroll(state = rememberScrollState())
+                Column {
+                    Greeting(
+                        name = "" + someBook.title +
+                                ", is theSame = " + (someBook == theSameBook),
+                        modifier = Modifier.padding(
+                            PaddingValues(
+                                top = 50.dp,
+                                bottom = 50.dp,
+                                start = (
+                                        if (!connection.progress.isNaN()) {
+                                            connection.progress * 40
+                                        } else {
+                                            0.0f
+                                        }).dp
+                            )
+                        )
                     )
-                    {
-                        var dupa = connection.progress * 20
-                        Log.d("dupa ? = ", "" + dupa)
-                        item {
-                            Greeting(
-                                name = "" + someBook.title +
-                                        ", is theSame = " + (someBook == theSameBook),
-                                modifier = Modifier.padding(
-                                    PaddingValues(
-                                        top  = 50.dp,
-                                        bottom = 50.dp,
-                                        start = (
-                                                if (!connection.progress.isNaN()) {
-                                                    connection.progress * 40
-                                                } else {
-                                                    0.0f
-                                                }).dp
-                                    )
-                                )
-                            )
 
-                        }
-                        item {
-                            Greeting(
-                                name = "" + bookND1.title +
-                                        ", is theSame = " + (bookND1 == bookND2),
-                                modifier = Modifier.padding(
-                                    PaddingValues(
-                                        start = (
-                                                if (!connection.progress.isNaN()) {
-                                                    connection.progress * 20
-                                                } else {
-                                                    0.0f
-                                                }).dp
+                    Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
+                        LazyColumn(
+                            modifier = Modifier.nestedScroll(connection)
+                                .fillMaxSize()
+                            //    .verticalScroll(state = rememberScrollState())
+                        )
+                        {
+                            var dupa = connection.progress * 20
+                            Log.d("dupa ? = ", "" + dupa)
+                            item {
+                                Greeting(
+                                    name = "" + someBook.title +
+                                            ", is theSame = " + (someBook == theSameBook),
+                                    modifier = Modifier.padding(
+                                        PaddingValues(
+                                            top = 50.dp,
+                                            bottom = 50.dp,
+                                            start = (
+                                                    if (!connection.progress.isNaN()) {
+                                                        connection.progress * 40
+                                                    } else {
+                                                        0.0f
+                                                    }).dp
+                                        )
                                     )
                                 )
-                            )
-                        }
-                        for (i in 0..20)
+
+                            }
                             item {
-                                SomeLayout(
+                                Greeting(
                                     name = "" + bookND1.title +
                                             ", is theSame = " + (bookND1 == bookND2),
                                     modifier = Modifier.padding(
                                         PaddingValues(
-                                            top = 15.dp, bottom = 15.dp,
-                                            start = 10.dp, end = 10.dp
+                                            start = (
+                                                    if (!connection.progress.isNaN()) {
+                                                        connection.progress * 20
+                                                    } else {
+                                                        0.0f
+                                                    }).dp
                                         )
                                     )
                                 )
                             }
+                            for (i in 0..20)
+                                item {
+                                    SomeLayout(
+                                        name = "" + bookND1.title +
+                                                ", is theSame = " + (bookND1 == bookND2),
+                                        modifier = Modifier.padding(
+                                            PaddingValues(
+                                                top = 15.dp, bottom = 15.dp,
+                                                start = 10.dp, end = 10.dp
+                                            )
+                                        )
+                                    )
+                                }
+                        }
                     }
                 }
             }
         }
-
 
         fun getMedian(values: List<Int>): Float {
             return if (values.size % 2 == 1)
