@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
         val bookND2 = BookNonData("LOTR", "Tolkien", BookCondition.NEW)
         setContent {
             MyApplicationTheme {
-                Column {
+                Column(modifier = Modifier.background(Color.Black)) {
                     Row(horizontalArrangement = Arrangement.End) {
                         Spacer(Modifier.weight(1.0f))
                         Greeting(
@@ -88,6 +88,35 @@ class MainActivity : ComponentActivity() {
                     Scaffold(modifier = Modifier
                             .fillMaxSize()
                             .background(Color.Cyan)) { _ ->
+
+                        Spacer(Modifier.weight(1.0f))
+                        Greeting(
+                            name = "??",
+                            modifier = Modifier
+                                .background(Color.LightGray)
+                                .padding(
+                                    PaddingValues(
+                                        top = (10 +
+
+                                                if (!connection.progress.isNaN() && connection.progress >= 0) {
+                                                    15 + connection.progress * 20
+                                                } else {
+                                                    15.0f
+                                                }).dp,
+                                        bottom = (10 +
+
+                                                if (!connection.progress.isNaN() && connection.progress >= 0) {
+                                                    connection.progress * 20
+                                                } else {
+                                                    0.0f
+                                                }).dp,
+                                        start = 0.dp,
+                                        end = 0.dp
+                                    )
+                                )
+                        )
+
+
                         LazyColumn(
                             modifier = Modifier
                                 .nestedScroll(connection)
@@ -152,18 +181,23 @@ class MainActivity : ComponentActivity() {
 
                                 if (i == 0) {
                                     stickyHeader { // works
-                                        SomeLayoutRounded(
-                                            name = "here we have some sticky header",
-                                            modifier = Modifier
-                                                .padding(
-                                                    PaddingValues(
-                                                        top = 15.dp, bottom = 15.dp,
-                                                        start = 10.dp, end = 10.dp
+                                        Column() {
+                                            Box(modifier = Modifier.height(20.dp).
+                                            width(100.dp).background(Color.Blue))
+                                            SomeLayoutRounded(
+                                                name = "here we have some sticky header",
+                                                modifier = Modifier
+                                                    .padding(
+                                                        PaddingValues(
+                                                            top = 15.dp, bottom = 15.dp,
+                                                            start = 10.dp, end = 10.dp
+                                                        )
                                                     )
-                                                )
-                                                .background(Color.White
-                                                ), color = Color.Red
-                                        )
+                                                    .background(
+                                                        Color.White
+                                                    ), color = Color.Red
+                                            )
+                                        }
                                     }
                                 } else {
                                     item {
