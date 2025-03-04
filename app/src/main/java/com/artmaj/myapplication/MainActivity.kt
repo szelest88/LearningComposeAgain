@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.gestures.scrollable
@@ -41,6 +42,7 @@ val connection = CollapsingAppBarNestedScrollConnection() //initialing nestedScr
 
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -55,18 +57,28 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 Column {
                     Greeting(
-                        name = "" + someBook.title +
+                        name = "Hm" + someBook.title +
                                 ", is theSame = " + (someBook == theSameBook),
-                        modifier = Modifier.padding(
+                        modifier = Modifier.background(Color.LightGray).padding(
                             PaddingValues(
-                                top = 50.dp,
-                                bottom = 50.dp,
-                                start = (
+                                top = (10+
+
+                                        if (!connection.progress.isNaN() && connection.progress >= 0) {
+                                            15+connection.progress * 20
+                                        } else {
+                                            15.0f
+                                        }).dp
+                                ,
+                                bottom = (10+
+
                                         if (!connection.progress.isNaN() && connection.progress >= 0) {
                                             connection.progress * 20
                                         } else {
                                             0.0f
                                         }).dp
+                            ,
+                                start = 0.dp,
+                                end = 0.dp
                             )
                         )
                     )
@@ -80,11 +92,11 @@ class MainActivity : ComponentActivity() {
                         {
                             var dupa = connection.progress * 20
                             Log.d("dupa ? = ", "" + dupa)
-                            item {
+                            stickyHeader {
                                 Greeting(
-                                    name = "" + someBook.title +
+                                    name = "?" + someBook.title +
                                             ", is theSame = " + (someBook == theSameBook),
-                                    modifier = Modifier.padding(
+                                    modifier = Modifier.background(Color.Magenta).padding(
                                         PaddingValues(
                                             top = 50.dp,
                                             bottom = 50.dp,
@@ -97,11 +109,11 @@ class MainActivity : ComponentActivity() {
                                         )
                                     )
                                 )
-
                             }
+
                             item {
                                 Greeting(
-                                    name = "" + bookND1.title +
+                                    name = "!" + bookND1.title +
                                             ", is theSame = " + (bookND1 == bookND2),
                                     modifier = Modifier.padding(
                                         PaddingValues(
@@ -116,20 +128,40 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             for (i in 0..20)
-                                item {
-                                    SomeLayout(
-                                        name = "" + bookND1.title +
-                                                ", is theSame = " + (bookND1 == bookND2),
-                                        modifier = Modifier.padding(
-                                            PaddingValues(
-                                                top = 15.dp, bottom = 15.dp,
-                                                start = 10.dp, end = 10.dp
+                                if (i == 4) {
+                                    stickyHeader {
+                                        SomeLayout(
+                                            name = "" + bookND1.title +
+                                                    ", is theSame = " + (bookND1 == bookND2),
+                                            modifier = Modifier.padding(
+                                                PaddingValues(
+                                                    top = 15.dp, bottom = 15.dp,
+                                                    start = 10.dp, end = 10.dp
+                                                )
+                                            ).background(Color.Yellow)
+                                        )
+                                    }
+                                } else {
+                                    item {
+                                        SomeLayout(
+                                            name = "" + bookND1.title +
+                                                    ", is theSame = " + (bookND1 == bookND2),
+                                            modifier = Modifier.padding(
+                                                PaddingValues(
+                                                    top = 15.dp, bottom = 15.dp,
+                                                    start = 10.dp, end = 10.dp
+                                                )
                                             )
                                         )
-                                    )
+                                    }
+
+
                                 }
                         }
+
+
                     }
+
                 }
             }
         }
