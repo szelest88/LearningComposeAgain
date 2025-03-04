@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
@@ -30,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -59,33 +62,36 @@ class MainActivity : ComponentActivity() {
                     Greeting(
                         name = "Hm" + someBook.title +
                                 ", is theSame = " + (someBook == theSameBook),
-                        modifier = Modifier.background(Color.LightGray).padding(
-                            PaddingValues(
-                                top = (10+
+                        modifier = Modifier
+                            .background(Color.LightGray)
+                            .padding(
+                                PaddingValues(
+                                    top = (10 +
 
-                                        if (!connection.progress.isNaN() && connection.progress >= 0) {
-                                            15+connection.progress * 20
-                                        } else {
-                                            15.0f
-                                        }).dp
-                                ,
-                                bottom = (10+
+                                            if (!connection.progress.isNaN() && connection.progress >= 0) {
+                                                15 + connection.progress * 20
+                                            } else {
+                                                15.0f
+                                            }).dp,
+                                    bottom = (10 +
 
-                                        if (!connection.progress.isNaN() && connection.progress >= 0) {
-                                            connection.progress * 20
-                                        } else {
-                                            0.0f
-                                        }).dp
-                            ,
-                                start = 0.dp,
-                                end = 0.dp
+                                            if (!connection.progress.isNaN() && connection.progress >= 0) {
+                                                connection.progress * 20
+                                            } else {
+                                                0.0f
+                                            }).dp,
+                                    start = 0.dp,
+                                    end = 0.dp
+                                )
                             )
-                        )
                     )
 
-                    Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
+                    Scaffold(modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.Cyan)) { _ ->
                         LazyColumn(
-                            modifier = Modifier.nestedScroll(connection)
+                            modifier = Modifier
+                                .nestedScroll(connection)
                                 .fillMaxSize()
                             //    .verticalScroll(state = rememberScrollState())
                         )
@@ -96,18 +102,20 @@ class MainActivity : ComponentActivity() {
                                 Greeting(
                                     name = "?" + someBook.title +
                                             ", is theSame = " + (someBook == theSameBook),
-                                    modifier = Modifier.background(Color.Magenta).padding(
-                                        PaddingValues(
-                                            top = 50.dp,
-                                            bottom = 50.dp,
-                                            start = (
-                                                    if (!connection.progress.isNaN() && connection.progress >= 0) {
-                                                        connection.progress * 40
-                                                    } else {
-                                                        0.0f
-                                                    }).dp
+                                    modifier = Modifier
+                                        .background(Color.Magenta)
+                                        .padding(
+                                            PaddingValues(
+                                                top = 50.dp,
+                                                bottom = 50.dp,
+                                                start = (
+                                                        if (!connection.progress.isNaN() && connection.progress >= 0) {
+                                                            connection.progress * 40
+                                                        } else {
+                                                            0.0f
+                                                        }).dp
+                                            )
                                         )
-                                    )
                                 )
                             }
 
@@ -127,9 +135,24 @@ class MainActivity : ComponentActivity() {
                                     )
                                 )
                             }
+                            stickyHeader {
+                                Box(
+                                    modifier = Modifier.background(color = Color.Black
+                                    )
+                                        .clip(
+                                            RoundedCornerShape(
+                                                topStart = 20.dp,
+                                                topEnd = 20.dp
+                                            )
+                                        ).height(150.dp).fillMaxWidth(1.0f),
+
+
+                                    content = { Text(text="dajdiasod", color = Color.White)}
+                                )
+                            }
                             for (i in 0..20)
-                                if (i == 4) {
-                                    stickyHeader {
+                                if(i==3){
+                                    item {
                                         SomeLayout(
                                             name = "" + bookND1.title +
                                                     ", is theSame = " + (bookND1 == bookND2),
@@ -138,7 +161,25 @@ class MainActivity : ComponentActivity() {
                                                     top = 15.dp, bottom = 15.dp,
                                                     start = 10.dp, end = 10.dp
                                                 )
-                                            ).background(Color.Yellow)
+                                            ).background(Color.White)
+                                        )
+                                    }
+
+                                }
+                                else if (i == 0) {
+                                    stickyHeader {
+                                        SomeLayoutRounded(
+                                            name = "" + bookND1.title +
+                                                    ", is theSame = " + (bookND1 == bookND2),
+                                            modifier = Modifier
+                                                .padding(
+                                                    PaddingValues(
+                                                        top = 15.dp, bottom = 15.dp,
+                                                        start = 10.dp, end = 10.dp
+                                                    )
+                                                )
+                                                .background(Color.White
+                                                ), color = Color.Red
                                         )
                                     }
                                 } else {
@@ -194,7 +235,10 @@ class MainActivity : ComponentActivity() {
                     text = "Dupa $name!",
                     modifier = modifier
                 )
-                Box(modifier = Modifier.width(32.dp).height(32.dp).background(Color(200, 240, 200)))
+                Box(modifier = Modifier
+                        .width(32.dp)
+                        .height(32.dp)
+                        .background(Color(200, 240, 200)))
 
             }
             HorizontalDivider(
@@ -204,12 +248,58 @@ class MainActivity : ComponentActivity() {
             )
         }
     }
+    @Composable
+    fun SomeLayoutRounded(name: String, modifier: Modifier = Modifier, color: Color = Color.Cyan) {
+        Box(Modifier.background(Color.Black)) {
+            Column(
+                modifier = Modifier
+                    .clip(
+                        RoundedCornerShape(
+                            topStart = 20.dp,
+                            topEnd = 20.dp
+                        )
+                    )
+                    .background(color)
+            ) {
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(1.0f),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Dupa $name!",
+                        modifier = modifier
+                    )
+                    Box(
+                        modifier = Modifier
+                            .width(32.dp)
+                            .height(32.dp)
+                            .background(Color(200, 240, 200))
+                    )
+
+                }
+                HorizontalDivider(
+                    modifier = Modifier.padding(start = 12.dp),
+                    thickness = 1.dp,
+                    color = Color.Red
+                )
+            }
+        }
+    }
 
     @Preview(showBackground = true)
     @Composable
     fun SomeLayoutPreview() {
         MyApplicationTheme {
             SomeLayout("Android")
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun SomeLayoutRoundedPreview() {
+        MyApplicationTheme {
+            SomeLayoutRounded("Android")
         }
     }
 
