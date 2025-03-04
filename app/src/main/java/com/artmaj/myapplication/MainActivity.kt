@@ -62,8 +62,8 @@ class MainActivity : ComponentActivity() {
                                 top = 50.dp,
                                 bottom = 50.dp,
                                 start = (
-                                        if (!connection.progress.isNaN()) {
-                                            connection.progress * 40
+                                        if (!connection.progress.isNaN() && connection.progress >= 0) {
+                                            connection.progress * 20
                                         } else {
                                             0.0f
                                         }).dp
@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
                                             top = 50.dp,
                                             bottom = 50.dp,
                                             start = (
-                                                    if (!connection.progress.isNaN()) {
+                                                    if (!connection.progress.isNaN() && connection.progress >= 0) {
                                                         connection.progress * 40
                                                     } else {
                                                         0.0f
@@ -106,7 +106,7 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier.padding(
                                         PaddingValues(
                                             start = (
-                                                    if (!connection.progress.isNaN()) {
+                                                    if (!connection.progress.isNaN() && connection.progress >= 0) {
                                                         connection.progress * 20
                                                     } else {
                                                         0.0f
