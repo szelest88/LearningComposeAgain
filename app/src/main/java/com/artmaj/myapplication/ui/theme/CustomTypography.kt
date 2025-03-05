@@ -14,15 +14,27 @@ object  CustomTypography{
 
     val SmallInfo = TextStyle(
         fontFamily = FontFamily.Default,
-        fontSize = 16.sp,
+        fontSize = 12.sp,
         fontWeight = FontWeight.SemiBold,
+        lineHeight = 14.sp
+    )
+    val SemiInfo = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontSize = 20.sp,
+        fontWeight =  FontWeight.Normal,
+        lineHeight = 20.sp
+    )
+    val MainText = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontSize = 16.sp,
+        fontWeight =  FontWeight.Normal,
         lineHeight = 18.sp
     )
     val Heading1 = TextStyle(
         fontFamily = FontFamily.Default,
-        fontSize = 36.sp,
+        fontSize = 22.sp,
         fontWeight = FontWeight.SemiBold,
-        lineHeight = 48.sp
+        lineHeight = 24.sp
     )
 }
     /* Other default text styles to override

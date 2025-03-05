@@ -23,9 +23,7 @@ class CollapsingAppBarNestedScrollConnection : NestedScrollConnection {
          *  when direction is negative, meaning scrolling downward,
          *  we are not consuming delta but passing it for Node Consumption
          */
-        if (delta >= 0f) {
-            return Offset.Zero
-        }
+
         val newOffset = headerOffset + delta
         val previousOffset = headerOffset
         val heightDelta = -(maxHeight - minHeight)

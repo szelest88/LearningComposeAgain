@@ -1,7 +1,5 @@
 package com.artmaj.myapplication
 
-import android.annotation.SuppressLint
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -9,9 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -34,12 +29,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.artmaj.myapplication.ui.theme.CustomTypography
 import com.artmaj.myapplication.ui.theme.MyApplicationTheme
+import com.artmaj.myapplication.ui.theme.Typography
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
-val connection: CollapsingAppBarNestedScrollConnection = CollapsingAppBarNestedScrollConnection() //initialing nestedScrollConnection here
-
+val connection = CollapsingAppBarNestedScrollConnection() //initialing nestedScrollConnection here
 
 
 class MainActivity : ComponentActivity() {
@@ -56,148 +54,142 @@ class MainActivity : ComponentActivity() {
         val bookND2 = BookNonData("LOTR", "Tolkien", BookCondition.NEW)
         setContent {
             MyApplicationTheme {
-                Column(modifier = Modifier.background(Color.Black)) {
-                    Row(horizontalArrangement = Arrangement.End) {
-                        Spacer(Modifier.weight(1.0f))
-                        Greeting(
-                            name = "??",
-                            modifier = Modifier
-                                .background(Color.LightGray)
-                                .padding(
-                                    PaddingValues(
-                                        top = (10 +
+                Box(modifier = Modifier.background(Color.Blue).fillMaxWidth(1.0f)) {
 
-                                                if (!connection.progress.isNaN() && connection.progress >= 0) {
-                                                    15 + connection.progress * 20
-                                                } else {
-                                                    15.0f
-                                                }).dp,
-                                        bottom = (10 +
-
-                                                if (!connection.progress.isNaN() && connection.progress >= 0) {
-                                                    connection.progress * 20
-                                                } else {
-                                                    0.0f
-                                                }).dp,
-                                        start = 0.dp,
-                                        end = 0.dp
-                                    )
-                                )
-                        )
-                    }
-                    Scaffold(modifier = Modifier
+                    Scaffold(
+                        modifier = Modifier
                             .fillMaxSize()
-                            .background(Color.Cyan)) { _ ->
-
-                        Spacer(Modifier.weight(1.0f))
-                        Greeting(
-                            name = "??",
-                            modifier = Modifier
-                                .background(Color.LightGray)
-                                .padding(
-                                    PaddingValues(
-                                        top = (10 +
-
-                                                if (!connection.progress.isNaN() && connection.progress >= 0) {
-                                                    15 + connection.progress * 20
-                                                } else {
-                                                    15.0f
-                                                }).dp,
-                                        bottom = (10 +
-
-                                                if (!connection.progress.isNaN() && connection.progress >= 0) {
-                                                    connection.progress * 20
-                                                } else {
-                                                    0.0f
-                                                }).dp,
-                                        start = 0.dp,
-                                        end = 0.dp
-                                    )
-                                )
-                        )
-
-
+                            .background(Color.Red)
+                    ) { _ ->
                         LazyColumn(
                             modifier = Modifier
                                 .nestedScroll(connection)
                                 .fillMaxSize()
+                                .background(Color.Magenta).padding(top = 80.dp)
                             //    .verticalScroll(state = rememberScrollState())
                         )
                         {
+                            var dupa = connection.progress * 20
+                            Log.d("dupa ? = ", "" + dupa)
 
-                            stickyHeader {
-                                Greeting(
-                                    name = "?" + someBook.title +
-                                            ", is theSame = " + (someBook == theSameBook),
-                                    modifier = Modifier
-                                        .background(Color.Magenta)
-                                        .padding(
-                                            PaddingValues(
-                                                top = 50.dp,
-                                                bottom = 50.dp,
-                                                start = (
-                                                        if (!connection.progress.isNaN() && connection.progress >= 0) {
-                                                            connection.progress * 40
-                                                        } else {
-                                                            0.0f
-                                                        }).dp
-                                            )
-                                        )
-                                )
-                            }
 
+//                            item {
+//                                Greeting(
+//                                    name = "!" + bookND1.title +
+//                                            ", is theSadme = " + (bookND1 == bookND2),
+//                                    modifier = Modifier.padding(
+//                                        PaddingValues(
+//                                            top = 20.dp,
+//                                            start = (
+//                                                    if (!connection.headerOffset.isNaN() && connection.headerOffset >= 0) {
+//                                                        connection.headerOffset * 20
+//                                                    } else {
+//                                                        0.0f
+//                                                    }).dp
+//                                        )
+//                                    )
+//                                )
+//                            }
                             item {
-                                Greeting(
-                                    name = "!" + bookND1.title +
-                                            ", is theSame = " + (bookND1 == bookND2),
-                                    modifier = Modifier.padding(
-                                        PaddingValues(
-                                            start = (
-                                                    if (!connection.progress.isNaN() && connection.progress >= 0) {
-                                                        connection.progress * 20
-                                                    } else {
-                                                        0.0f
-                                                    }).dp
-                                        )
+                                Column(
+                                    modifier = Modifier
+                                        .background(Color.Black)
+                                        .padding(top = 50.dp, start = 10.dp, end = 10.dp)
+                                ) {
+
+                                    Text(
+                                        "AKTORKA", style = CustomTypography.SmallInfo,
+                                        color = com.artmaj.myapplication.ui.theme.FilmwebYellow
                                     )
-                                )
-                            }
-                            stickyHeader { // does not work?
-                                Box(
-                                    modifier = Modifier.background(color = Color.Black
+                                    Text(
+                                        "Anya Taylor-Joy?", style = CustomTypography.Heading1,
+                                        color = Color.White
                                     )
-                                        .clip(
-                                            RoundedCornerShape(
-                                                topStart = 25.dp,
-                                                topEnd = 20.dp
-                                            )
-                                        ).height(150.dp).fillMaxWidth(1.0f),
-
-
-                                    content = { Text(text="Second sticky header?", color = Color.White)}
-                                )
-                            }
-                            for (i in 0..40)
-
-                                if (i == 0) {
-                                    stickyHeader { // works
-                                        Column() {
-                                            Box(modifier = Modifier.height(20.dp).
-                                            width(100.dp).background(Color.Blue))
-                                            SomeLayoutRounded(
-                                                name = "here we have some sticky header",
-                                                modifier = Modifier
-                                                    .padding(
-                                                        PaddingValues(
-                                                            top = 15.dp, bottom = 15.dp,
-                                                            start = 10.dp, end = 10.dp
-                                                        )
+                                    Text(
+                                        "Anya josephine Marie Taylor-Joy",
+                                        style = CustomTypography.SemiInfo,
+                                        color = Color.White
+                                    )
+                                    Row(modifier = Modifier.padding(bottom = 20.dp)) {
+                                        Box(
+                                            modifier = Modifier
+                                                .background(
+                                                    color = Color.Red
+                                                )
+                                                .clip(
+                                                    RoundedCornerShape(
+                                                        topStart = 10.dp,
+                                                        topEnd = 10.dp
                                                     )
-                                                    .background(
-                                                        Color.White
-                                                    ), color = Color.Red
-                                            )
-                                        }
+                                                )
+                                                .height(160.dp)
+                                                .width(120.dp)
+                                        )
+
+                                        { Text(text = "", color = Color.White) }
+
+                                        Box(
+                                            modifier = Modifier
+                                                .background(
+                                                    color = Color.Black
+                                                )
+                                                .clip(
+                                                    RoundedCornerShape(
+                                                        topStart = 20.dp,
+                                                        topEnd = 20.dp
+                                                    )
+                                                )
+                                                .height(150.dp)
+                                                .fillMaxWidth(1.0f)
+                                                .padding(15.dp),
+
+
+                                            content = {
+                                                Text(
+                                                    text = "Anya Josephine Marie Taylor-Joy urodziła się w Miami na Florydzie jako najmłodsze z sześciorga dzieci. Jej matka ma korzenie afrykańsko-hiszpańsko-angielskie, a w żyłach ojca płynie krew szkocka\"",
+                                                    color = Color.White,
+                                                    style = CustomTypography.MainText
+                                                )
+                                            }
+                                        )
+                                    }
+                                }
+                            }
+
+
+                            for (i in 0..20)
+                                if (i == 3) {
+                                    item {
+                                        SomeLayout(
+                                            name = "" + bookND1.title +
+                                                    ", is theSame = " + (bookND1 == bookND2),
+                                            modifier = Modifier
+                                                .padding(
+                                                    PaddingValues(
+                                                        top = 15.dp, bottom = 15.dp,
+                                                        start = 10.dp, end = 10.dp
+                                                    )
+                                                )
+                                                .background(Color.White)
+                                        )
+                                    }
+
+                                } else if (i == 0) {
+                                    stickyHeader {
+                                        SomeLayoutRounded(
+                                            name = "" + bookND1.title +
+                                                    ", is theSame = " + (bookND1 == bookND2),
+                                            modifier = Modifier
+                                                .padding(
+                                                    PaddingValues(
+                                                        top = 15.dp, bottom = 15.dp,
+                                                        start = 10.dp, end = 10.dp
+                                                    )
+                                                )
+                                                .background(
+                                                    Color.White
+                                                ), color = Color.White
+                                        )
                                     }
                                 } else {
                                     item {
@@ -220,6 +212,10 @@ class MainActivity : ComponentActivity() {
 
                     }
 
+                    CustomTopMenu(
+                    )
+
+
                 }
             }
         }
@@ -233,10 +229,59 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
+    fun CustomTopHeader(name: String, modifier: Modifier = Modifier) {
+        Greeting(
+            name = name,
+            modifier = Modifier
+                .background(Color.Transparent)
+
+                .padding(
+                    PaddingValues(
+                        top = (10 +
+
+                                if (!connection.headerOffset.isNaN() && connection.headerOffset * 20 + 15 >= 0) {
+                                    15 + connection.headerOffset * 20
+                                } else {
+                                    15.0f
+                                }).dp,
+                        bottom = (10 +
+
+                                if (!connection.headerOffset.isNaN() && connection.headerOffset >= 0) {
+                                    connection.headerOffset * 20
+                                } else {
+                                    0.0f
+                                }).dp,
+                        start = 0.dp,
+                        end = 0.dp
+                    )
+                )
+        )
+    }
+
+    @Composable
+    fun CustomTopMenu() {
+        Row(modifier = Modifier
+            .height(IntrinsicSize.Min).fillMaxWidth(1.0f).padding(top = 20.dp)) {
+            Text("Anya blabla")
+            Spacer(Modifier.weight(1.0f))
+            Text(text = "MENU", color = Color.White)
+        }
+    }
+
+    @Preview(widthDp = 300, heightDp = 100)
+    @Composable
+    fun CustomTopMenuPreview() {
+        MyApplicationTheme {
+            CustomTopMenu()
+        }
+    }
+
+    @Composable
     fun Greeting(name: String, modifier: Modifier = Modifier) {
         Text(
             text = "Hello $name!",
-            modifier = modifier
+            modifier = modifier,
+            color = Color.White
         )
     }
 
@@ -252,10 +297,12 @@ class MainActivity : ComponentActivity() {
                     text = "Dupa $name!",
                     modifier = modifier
                 )
-                Box(modifier = Modifier
+                Box(
+                    modifier = Modifier
                         .width(32.dp)
                         .height(32.dp)
-                        .background(Color(200, 240, 200)))
+                        .background(Color(200, 240, 200))
+                )
 
             }
             HorizontalDivider(
@@ -265,6 +312,7 @@ class MainActivity : ComponentActivity() {
             )
         }
     }
+
     @Composable
     fun SomeLayoutRounded(name: String, modifier: Modifier = Modifier, color: Color = Color.Cyan) {
         Box(Modifier.background(Color.Black)) {
@@ -283,15 +331,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth(1.0f),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = "Dupa $name!",
-                        modifier = modifier
-                    )
+
                     Box(
                         modifier = Modifier
                             .width(32.dp)
                             .height(32.dp)
-                            .background(Color(200, 240, 200))
                     )
 
                 }
