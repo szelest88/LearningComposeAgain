@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -56,11 +57,13 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 Box(modifier = Modifier.background(Color.Blue).fillMaxWidth(1.0f)) {
 
+                    var dupa = connection.progress * 20
                     Scaffold(
                         modifier = Modifier
                             .fillMaxSize()
                             .background(Color.Red)
                     ) { _ ->
+
                         LazyColumn(
                             modifier = Modifier
                                 .nestedScroll(connection)
@@ -69,7 +72,6 @@ class MainActivity : ComponentActivity() {
                             //    .verticalScroll(state = rememberScrollState())
                         )
                         {
-                            var dupa = connection.progress * 20
                             Log.d("dupa ? = ", "" + dupa)
 
 
@@ -212,8 +214,7 @@ class MainActivity : ComponentActivity() {
 
                     }
 
-                    CustomTopMenu(
-                    )
+                    CustomTopMenu(1-dupa*0.05f)
 
 
                 }
@@ -259,10 +260,10 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun CustomTopMenu() {
+    fun CustomTopMenu(opacity: Float) {
         Row(modifier = Modifier
             .height(IntrinsicSize.Min).fillMaxWidth(1.0f).padding(top = 20.dp)) {
-            Text("Anya blabla")
+            Text(modifier = Modifier.alpha(opacity),text = "Anya blabla", color = Color.White)
             Spacer(Modifier.weight(1.0f))
             Text(text = "MENU", color = Color.White)
         }
@@ -272,7 +273,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun CustomTopMenuPreview() {
         MyApplicationTheme {
-            CustomTopMenu()
+            CustomTopMenu(1.0f)
         }
     }
 
