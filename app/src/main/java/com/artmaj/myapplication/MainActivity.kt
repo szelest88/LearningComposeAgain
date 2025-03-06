@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
@@ -226,8 +227,8 @@ class MainActivity : ComponentActivity() {
                                                     top = 15.dp, bottom = 15.dp,
                                                     start = 10.dp, end = 10.dp
                                                 )
-                                            )
-                                        )
+                                            ).clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)))
+
                                     }
 
 
@@ -339,7 +340,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun SomeLayoutRounded(name: String, modifier: Modifier = Modifier, color: Color = Color.Cyan) {
-        Box(Modifier.background(Color.Black)) {
+        Box(Modifier.background(Color.Transparent)) {
             Column(
                 modifier = Modifier
                     .clip(
