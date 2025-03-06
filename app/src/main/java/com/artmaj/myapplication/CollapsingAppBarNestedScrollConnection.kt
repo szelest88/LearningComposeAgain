@@ -13,6 +13,10 @@ class CollapsingAppBarNestedScrollConnection : NestedScrollConnection {
         private set
     var progress: Float by mutableFloatStateOf(1f)
         private set
+    var total: Float by mutableFloatStateOf(1f)
+        private set
+    var additionalOffset: Float by mutableFloatStateOf(1f)
+        private set
 
     var maxHeight: Float by mutableFloatStateOf(50f)
     var minHeight: Float by mutableFloatStateOf(0f)
@@ -23,13 +27,15 @@ class CollapsingAppBarNestedScrollConnection : NestedScrollConnection {
          *  when direction is negative, meaning scrolling downward,
          *  we are not consuming delta but passing it for Node Consumption
          */
-
+total += delta
         val newOffset = headerOffset + delta
         val previousOffset = headerOffset
         val heightDelta = -(maxHeight - minHeight)
         headerOffset = if (heightDelta > 0) 0f else newOffset.coerceIn(heightDelta, 0f)
         progress = 1f - headerOffset / -maxHeight
         val consumed = headerOffset - previousOffset
+        additionalOffset += delta
+        additionalOffset = additionalOffset.coerceIn(5f,10f)
         return Offset(0f, consumed)
     }
 
@@ -41,6 +47,9 @@ class CollapsingAppBarNestedScrollConnection : NestedScrollConnection {
         headerOffset = if (heightDelta > 0) 0f else newOffset.coerceIn(heightDelta, 0f)
         progress = 1f - headerOffset / -maxHeight
         val consumedValue = headerOffset - previousOffset
+      //  additionalOffset = headerOffset - previousOffset
+        additionalOffset += delta
+        additionalOffset = additionalOffset.coerceIn(5f,10f)
         return Offset(0f, consumedValue)
     }
 }

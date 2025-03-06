@@ -57,20 +57,20 @@ class MainActivity : ComponentActivity() {
         val bookND2 = BookNonData("LOTR", "Tolkien", BookCondition.NEW)
         setContent {
             MyApplicationTheme {
-                Box(modifier = Modifier.background(Color.Blue).fillMaxWidth(1.0f)) {
+                Box(modifier = Modifier.background(Color.Transparent).fillMaxWidth(1.0f)) {
 
                     var dupa = connection.progress * 20
                     Scaffold(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(Color.Red)
+                            .background(Color.Black)
                     ) { _ ->
 
                         LazyColumn(
                             modifier = Modifier
                                 .nestedScroll(connection)
                                 .fillMaxSize()
-                                .background(Color.Blue).padding(top = 0.dp, bottom = 0.dp)
+                                .background(Color.Black).padding(top = (Math.min(40f,0.4f*(Math.max(0.0f,40-connection.total*0.2f)))).dp, bottom = 0.dp)
                             //    .verticalScroll(state = rememberScrollState())
                         )
                         {
@@ -112,7 +112,7 @@ class MainActivity : ComponentActivity() {
                                         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
                                     )
                                     Text(
-                                        "Anya josephine Marie Taylor-Joy",
+                                        "Anya Josephine Marie Taylor-Joy",
                                         style = CustomTypography.SemiInfo,
                                         color = Color.White,
                                         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
@@ -179,7 +179,7 @@ class MainActivity : ComponentActivity() {
                             }
 
 
-                            for (i in 0..20)
+                            for (i in 0..40)
                                 if (i == 3) {
                                     item {
                                         SomeLayout(
@@ -198,15 +198,15 @@ class MainActivity : ComponentActivity() {
 
                                 } else if (i == 0) {
                                     stickyHeader {
-                                        Column(Modifier.offset(y = 5.dp)) {
-                                            Spacer(Modifier.height(15.dp))
+                                        Column(Modifier.offset(y = 1.dp)) {
+                                            Spacer(Modifier.height((2).dp))
                                             SomeLayoutRounded(
                                                 name = "" + bookND1.title +
                                                         ", is theSame = " + (bookND1 == bookND2),
                                                 modifier = Modifier
                                                     .padding(
                                                         PaddingValues(
-                                                            top = 15.dp, bottom = 15.dp,
+                                                            top = 25.dp, bottom = 25.dp,
                                                             start = 10.dp, end = 10.dp
                                                         )
                                                     )
@@ -359,7 +359,7 @@ class MainActivity : ComponentActivity() {
                     Box(
                         modifier = Modifier
                             .width(32.dp)
-                            .height(32.dp)
+                            .height(42.dp)
                     )
 
                 }
