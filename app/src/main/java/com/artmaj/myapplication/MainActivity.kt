@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.artmaj.myapplication.ui.theme.CustomTypography
@@ -68,7 +70,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .nestedScroll(connection)
                                 .fillMaxSize()
-                                .background(Color.Magenta).padding(top = 80.dp)
+                                .background(Color.Blue).padding(top = 0.dp, bottom = 0.dp)
                             //    .verticalScroll(state = rememberScrollState())
                         )
                         {
@@ -96,23 +98,26 @@ class MainActivity : ComponentActivity() {
                                 Column(
                                     modifier = Modifier
                                         .background(Color.Black)
-                                        .padding(top = 50.dp, start = 10.dp, end = 10.dp)
+                                        .padding(top = 50.dp, start = 10.dp, end = 10.dp, bottom = 10.dp)
                                 ) {
 
                                     Text(
                                         "AKTORKA", style = CustomTypography.SmallInfo,
-                                        color = com.artmaj.myapplication.ui.theme.FilmwebYellow
+                                        color = com.artmaj.myapplication.ui.theme.FilmwebYellow,
+                                        modifier = Modifier.padding(top = 15.dp, bottom = 5.dp)
                                     )
                                     Text(
                                         "Anya Taylor-Joy?", style = CustomTypography.Heading1,
-                                        color = Color.White
+                                        color = Color.White,
+                                        modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
                                     )
                                     Text(
                                         "Anya josephine Marie Taylor-Joy",
                                         style = CustomTypography.SemiInfo,
-                                        color = Color.White
+                                        color = Color.White,
+                                        modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
                                     )
-                                    Row(modifier = Modifier.padding(bottom = 20.dp)) {
+                                    Row(modifier = Modifier.padding(top = 10.dp, bottom = 0.dp)) {
                                         Box(
                                             modifier = Modifier
                                                 .background(
@@ -143,17 +148,32 @@ class MainActivity : ComponentActivity() {
                                                 )
                                                 .height(150.dp)
                                                 .fillMaxWidth(1.0f)
-                                                .padding(15.dp),
+                                                .padding(start = 15.dp, end = 15.dp, top = 15.dp),
 
 
                                             content = {
                                                 Text(
                                                     text = "Anya Josephine Marie Taylor-Joy urodziła się w Miami na Florydzie jako najmłodsze z sześciorga dzieci. Jej matka ma korzenie afrykańsko-hiszpańsko-angielskie, a w żyłach ojca płynie krew szkocka\"",
                                                     color = Color.White,
-                                                    style = CustomTypography.MainText
+                                                    style = CustomTypography.MainText,
+                                                    overflow = TextOverflow.Ellipsis
                                                 )
                                             }
                                         )
+                                    }
+
+                                    Column(modifier = Modifier.offset(x = 0.dp, y=10.dp)){
+                                        Row(){Text(text="wiek:",Modifier.padding(horizontal = 4.dp).weight(0.75f) , color = Color.White)
+                                            Text(text="45345",Modifier.padding(horizontal = 4.dp).weight(1f), color = Color.White)}
+
+                                        Row(){Text(text="urodzona:",Modifier.padding(horizontal = 4.dp).weight(0.75f) , color = Color.White)
+                                            Text(text="5t4gtg",Modifier.padding(horizontal = 4.dp).weight(1f), color = Color.White)}
+
+                                        Row(){Text(text="miejsce urodzenia:",Modifier.padding(horizontal = 4.dp).weight(0.75f) , color = Color.White)
+                                            Text(text="fger g gfd ",Modifier.padding(horizontal = 4.dp).weight(1f), color = Color.White)}
+
+                                        Row(){Text(text="wzrost:",Modifier.padding(horizontal = 4.dp).weight(0.75f),color = Color.White)
+                                            Text(text="45345",Modifier.padding(horizontal = 4.dp).weight(1f), color = Color.White)}
                                     }
                                 }
                             }
@@ -178,20 +198,23 @@ class MainActivity : ComponentActivity() {
 
                                 } else if (i == 0) {
                                     stickyHeader {
-                                        SomeLayoutRounded(
-                                            name = "" + bookND1.title +
-                                                    ", is theSame = " + (bookND1 == bookND2),
-                                            modifier = Modifier
-                                                .padding(
-                                                    PaddingValues(
-                                                        top = 15.dp, bottom = 15.dp,
-                                                        start = 10.dp, end = 10.dp
+                                        Column(Modifier.offset(y = 5.dp)) {
+                                            Spacer(Modifier.height(15.dp))
+                                            SomeLayoutRounded(
+                                                name = "" + bookND1.title +
+                                                        ", is theSame = " + (bookND1 == bookND2),
+                                                modifier = Modifier
+                                                    .padding(
+                                                        PaddingValues(
+                                                            top = 15.dp, bottom = 15.dp,
+                                                            start = 10.dp, end = 10.dp
+                                                        )
                                                     )
-                                                )
-                                                .background(
-                                                    Color.White
-                                                ), color = Color.White
-                                        )
+                                                    .background(
+                                                        Color.White
+                                                    ), color = Color.White
+                                            )
+                                        }
                                     }
                                 } else {
                                     item {

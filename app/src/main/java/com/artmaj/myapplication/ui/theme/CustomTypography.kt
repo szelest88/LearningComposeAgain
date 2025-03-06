@@ -20,15 +20,15 @@ object  CustomTypography{
     )
     val SemiInfo = TextStyle(
         fontFamily = FontFamily.Default,
-        fontSize = 20.sp,
+        fontSize = 18.sp,
         fontWeight =  FontWeight.Normal,
         lineHeight = 20.sp
     )
     val MainText = TextStyle(
         fontFamily = FontFamily.Default,
-        fontSize = 16.sp,
+        fontSize = 14.sp,
         fontWeight =  FontWeight.Normal,
-        lineHeight = 18.sp
+        lineHeight = 16.sp
     )
     val Heading1 = TextStyle(
         fontFamily = FontFamily.Default,
