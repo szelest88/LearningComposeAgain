@@ -36,6 +36,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.artmaj.myapplication.ui.theme.CustomTypography
 import com.artmaj.myapplication.ui.theme.MyApplicationTheme
 import com.artmaj.myapplication.ui.theme.Typography
@@ -71,6 +72,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .nestedScroll(connection)
                                 .fillMaxSize()
+                                .zIndex(-10.0f)
                                 .background(Color.Black).padding(top = (Math.min(40f,0.4f*(Math.max(0.0f,40-connection.total*0.2f)))).dp, bottom = 0.dp)
 
                             //    .verticalScroll(state = rememberScrollState())
@@ -200,7 +202,7 @@ class MainActivity : ComponentActivity() {
 
                                 } else if (i == 0) {
                                     stickyHeader {
-                                        Column(modifier = Modifier.padding(top = 20.dp)) {
+                                        Column(modifier = Modifier.padding(top = 20.dp)            .zIndex(-10.0f)) {
                                             SomeLayoutRounded(
                                                 name = "" + bookND1.title +
                                                         ", isss theSame = " + (bookND1 == bookND2),
@@ -303,7 +305,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun SomeLayout(name: String, modifier: Modifier = Modifier) {
-        Column(modifier = Modifier.background(Color.Cyan)) {
+        Column(modifier = Modifier.background(Color.Cyan)
+            .zIndex(-10.0f)) {
 
             Row(
                 modifier = Modifier.fillMaxWidth(1.0f),
