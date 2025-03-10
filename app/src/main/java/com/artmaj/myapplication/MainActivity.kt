@@ -72,6 +72,7 @@ class MainActivity : ComponentActivity() {
                                 .nestedScroll(connection)
                                 .fillMaxSize()
                                 .background(Color.Black).padding(top = (Math.min(40f,0.4f*(Math.max(0.0f,40-connection.total*0.2f)))).dp, bottom = 0.dp)
+
                             //    .verticalScroll(state = rememberScrollState())
                         )
                         {
@@ -199,22 +200,12 @@ class MainActivity : ComponentActivity() {
 
                                 } else if (i == 0) {
                                     stickyHeader {
-                                        Column(Modifier.offset(y = 1.dp)) {
-                                            Spacer(Modifier.height((2).dp))
+                                        Column(modifier = Modifier.padding(top = 20.dp)) {
                                             SomeLayoutRounded(
                                                 name = "" + bookND1.title +
-                                                        ", is theSame = " + (bookND1 == bookND2),
-                                                modifier = Modifier
-                                                    .padding(
-                                                        PaddingValues(
-                                                            top = 25.dp, bottom = 25.dp,
-                                                            start = 10.dp, end = 10.dp
-                                                        )
-                                                    )
-                                                    .background(
-                                                        Color.White
-                                                    ), color = Color.White
-                                            )
+                                                        ", isss theSame = " + (bookND1 == bookND2),
+
+                                                )
                                         }
                                     }
                                 } else {
@@ -227,7 +218,7 @@ class MainActivity : ComponentActivity() {
                                                     top = 15.dp, bottom = 15.dp,
                                                     start = 10.dp, end = 10.dp
                                                 )
-                                            ).clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)))
+                                            ))
 
                                     }
 
@@ -342,14 +333,12 @@ class MainActivity : ComponentActivity() {
     fun SomeLayoutRounded(name: String, modifier: Modifier = Modifier, color: Color = Color.Cyan) {
         Box(Modifier.background(Color.Transparent)) {
             Column(
-                modifier = Modifier
-                    .clip(
-                        RoundedCornerShape(
-                            topStart = 20.dp,
-                            topEnd = 20.dp
-                        )
-                    )
-                    .background(color)
+                modifier = Modifier.clip(
+                    RoundedCornerShape(
+                        topStart = 20.dp,
+                        topEnd = 20.dp
+                    )).background(Color.White)
+
             ) {
 
                 Row(
@@ -360,7 +349,12 @@ class MainActivity : ComponentActivity() {
                     Box(
                         modifier = Modifier
                             .width(32.dp)
-                            .height(42.dp)
+                            .height(42.dp).clip(
+                                RoundedCornerShape(
+                                    topStart = 20.dp,
+                                    topEnd = 20.dp
+                                )
+                            )
                     )
 
                 }
