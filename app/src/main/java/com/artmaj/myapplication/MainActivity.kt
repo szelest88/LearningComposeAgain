@@ -34,8 +34,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.painter.BrushPainter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -147,7 +157,7 @@ class MainActivity : ComponentActivity() {
                                         Box(
                                             modifier = Modifier
                                                 .background(
-                                                    color = Color.Red
+                                                    color = Color.Gray
                                                 )
                                                 .clip(
                                                     RoundedCornerShape(
@@ -249,8 +259,8 @@ class MainActivity : ComponentActivity() {
                                 if (i == 0) {
                                     stickyHeader {
                                         Column(
-                                            modifier = Modifier.padding(top = 0.dp)
-                                                .background(Color.Black)
+                                            modifier = Modifier.padding(top = 0.dp).width(IntrinsicSize.Max)
+                                                .background(Color.Transparent)
                                         ) {
                                             SomeLayoutRounded(
                                                 name = "" + bookND1.title +
@@ -403,37 +413,11 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun SomeLayoutRounded(name: String, modifier: Modifier = Modifier, color: Color = Color.Cyan) {
-        Box(Modifier.background(Color.Transparent)) {
-            Column(
-                modifier = Modifier.clip(
-                    RoundedCornerShape(
-                        topStart = 20.dp,
-                        topEnd = 20.dp
-                    )).background(Color.White)
-
-            ) {
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(1.0f),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    Box(
-                        modifier = Modifier
-                            .width(32.dp)
-                            .height(42.dp).clip(
-                                RoundedCornerShape(
-                                    topStart = 20.dp,
-                                    topEnd = 20.dp
-                                )
-                            )
-                    )
-
-                }
-
-            }
-        }
+        Box(modifier =
+            Modifier.fillMaxWidth().height(140.dp).paint( painterResource(R.drawable.hm), alignment = Alignment.TopCenter)
+       )
     }
+
 
     @Preview(showBackground = true)
     @Composable
