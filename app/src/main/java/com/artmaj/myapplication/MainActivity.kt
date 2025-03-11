@@ -5,8 +5,10 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -22,7 +24,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -102,13 +107,30 @@ class MainActivity : ComponentActivity() {
                                 Column(
                                     modifier = Modifier
                                         .background(Color.Black)
-                                        .padding(top = 50.dp, start = 10.dp, end = 10.dp, bottom = 10.dp)
+                                        .padding(
+                                            top = 0.dp,
+                                            start = 10.dp,
+                                            end = 10.dp,
+                                            bottom = 10.dp
+                                        )
                                 ) {
+
+                                    Spacer(Modifier.height(10.dp))
+                                    Text(
+                                        modifier = Modifier.border(
+                                            width = 1.dp,
+                                            color = Color.White,
+                                            shape = RoundedCornerShape(4.dp)
+                                        ).padding(horizontal = 4.dp, vertical = 2.dp),
+                                        text = "#666 TOP AKTORKI",
+                                        style = CustomTypography.SmallInfo,
+                                        color = Color.White,
+                                    )
 
                                     Text(
                                         "AKTORKA", style = CustomTypography.SmallInfo,
                                         color = com.artmaj.myapplication.ui.theme.FilmwebYellow,
-                                        modifier = Modifier.padding(top = 15.dp, bottom = 5.dp)
+                                        modifier = Modifier.padding(top = 25.dp, bottom = 5.dp)
                                     )
                                     Text(
                                         "Anya Taylor-Joy?", style = CustomTypography.Heading1,
@@ -166,25 +188,97 @@ class MainActivity : ComponentActivity() {
                                         )
                                     }
 
-                                    Column(modifier = Modifier.offset(x = 0.dp, y=10.dp)){
-                                        Row(){Text(text="wiek:",Modifier.padding(horizontal = 4.dp).weight(0.75f) , color = Color.White)
-                                            Text(text="45345",Modifier.padding(horizontal = 4.dp).weight(1f), color = Color.White)}
+                                    Column(modifier = Modifier.offset(x = 0.dp, y = 10.dp).padding(bottom = 30.dp)) {
+                                        Row() {
+                                            Text(
+                                                text = "wiek:",
+                                                Modifier.padding(horizontal = 4.dp).weight(0.75f),
+                                                color = Color.White
+                                            )
+                                            Text(
+                                                text = "45345",
+                                                Modifier.padding(horizontal = 4.dp).weight(1f),
+                                                color = Color.White
+                                            )
+                                        }
 
-                                        Row(){Text(text="urodzona:",Modifier.padding(horizontal = 4.dp).weight(0.75f) , color = Color.White)
-                                            Text(text="5t4gtg",Modifier.padding(horizontal = 4.dp).weight(1f), color = Color.White)}
+                                        Row() {
+                                            Text(
+                                                text = "urodzona:",
+                                                Modifier.padding(horizontal = 4.dp).weight(0.75f),
+                                                color = Color.White
+                                            )
+                                            Text(
+                                                text = "5t4gtg",
+                                                Modifier.padding(horizontal = 4.dp).weight(1f),
+                                                color = Color.White
+                                            )
+                                        }
 
-                                        Row(){Text(text="miejsce urodzenia:",Modifier.padding(horizontal = 4.dp).weight(0.75f) , color = Color.White)
-                                            Text(text="fger g gfd ",Modifier.padding(horizontal = 4.dp).weight(1f), color = Color.White)}
+                                        Row() {
+                                            Text(
+                                                text = "miejsce urodzenia:",
+                                                Modifier.padding(horizontal = 4.dp).weight(0.75f),
+                                                color = Color.White
+                                            )
+                                            Text(
+                                                text = "fger g gfd ",
+                                                Modifier.padding(horizontal = 4.dp).weight(1f),
+                                                color = Color.White
+                                            )
+                                        }
 
-                                        Row(){Text(text="wzrost:",Modifier.padding(horizontal = 4.dp).weight(0.75f),color = Color.White)
-                                            Text(text="45345",Modifier.padding(horizontal = 4.dp).weight(1f), color = Color.White)}
+                                        Row() {
+                                            Text(
+                                                text = "wzrost:",
+                                                Modifier.padding(horizontal = 4.dp).weight(0.75f),
+                                                color = Color.White
+                                            )
+                                            Text(
+                                                text = "45345",
+                                                Modifier.padding(horizontal = 4.dp).weight(1f),
+                                                color = Color.White
+                                            )
+                                        }
                                     }
                                 }
                             }
 
 
                             for (i in 0..40)
-                                if (i == 3) {
+                                if (i == 0) {
+                                    stickyHeader {
+                                        Column(
+                                            modifier = Modifier.padding(top = 0.dp)
+                                                .background(Color.Black)
+                                        ) {
+                                            SomeLayoutRounded(
+                                                name = "" + bookND1.title +
+                                                        ", isss theSame = " + (bookND1 == bookND2),
+
+                                                )
+                                        }
+                                    }
+                                } else if (i == 1) {
+                                    item {
+                                        Box(Modifier.padding(0.dp).background(Color.White) ) {
+                                            Box(Modifier.padding(16.dp).background(Color.White)) {
+                                                Text(
+                                                    modifier = Modifier.fillMaxWidth(1.0f).border(
+                                                        width = 1.dp,
+                                                        color = Color.Gray,
+                                                        shape = RoundedCornerShape(5.dp)
+                                                    ).padding(13.dp),
+                                                    textAlign = TextAlign.Center,
+                                                    text = "#Dupa",
+                                                    color = Color.White,
+                                                )
+                                            }
+                                        }
+                                    }
+
+
+                                } else {
                                     item {
                                         SomeLayout(
                                             name = "" + bookND1.title +
@@ -199,31 +293,6 @@ class MainActivity : ComponentActivity() {
                                                 .background(Color.White)
                                         )
                                     }
-
-                                } else if (i == 0) {
-                                    stickyHeader {
-                                        Column(modifier = Modifier.padding(top = 20.dp)            .zIndex(-10.0f)) {
-                                            SomeLayoutRounded(
-                                                name = "" + bookND1.title +
-                                                        ", isss theSame = " + (bookND1 == bookND2),
-
-                                                )
-                                        }
-                                    }
-                                } else {
-                                    item {
-                                        SomeLayout(
-                                            name = "" + bookND1.title +
-                                                    ", is theSame = " + (bookND1 == bookND2),
-                                            modifier = Modifier.padding(
-                                                PaddingValues(
-                                                    top = 15.dp, bottom = 15.dp,
-                                                    start = 10.dp, end = 10.dp
-                                                )
-                                            ))
-
-                                    }
-
 
                                 }
                         }
@@ -361,11 +430,7 @@ class MainActivity : ComponentActivity() {
                     )
 
                 }
-                HorizontalDivider(
-                    modifier = Modifier.padding(start = 12.dp),
-                    thickness = 1.dp,
-                    color = Color.Red
-                )
+
             }
         }
     }
