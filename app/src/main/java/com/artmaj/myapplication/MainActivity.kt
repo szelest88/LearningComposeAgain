@@ -5,10 +5,11 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -22,11 +23,8 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,19 +32,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.draw.paint
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.drawscope.translate
-import androidx.compose.ui.graphics.painter.BrushPainter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,8 +44,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.artmaj.myapplication.ui.theme.CustomTypography
 import com.artmaj.myapplication.ui.theme.MyApplicationTheme
-import com.artmaj.myapplication.ui.theme.Typography
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+
 
 val connection = CollapsingAppBarNestedScrollConnection() //initialing nestedScrollConnection here
 
@@ -74,7 +64,9 @@ class MainActivity : ComponentActivity() {
         val bookND2 = BookNonData("LOTR", "Tolkien", BookCondition.NEW)
         setContent {
             MyApplicationTheme {
-                Box(modifier = Modifier.background(Color.Transparent).fillMaxWidth(1.0f)) {
+                Box(modifier = Modifier
+                    .background(Color.Transparent)
+                    .fillMaxWidth(1.0f)) {
 
                     var dupa = connection.progress * 20
                     Scaffold(
@@ -88,7 +80,13 @@ class MainActivity : ComponentActivity() {
                                 .nestedScroll(connection)
                                 .fillMaxSize()
                                 .zIndex(-10.0f)
-                                .background(Color.Black).padding(top = (Math.min(40f,0.4f*(Math.max(0.0f,40-connection.total*0.2f)))).dp, bottom = 0.dp)
+                                .background(Color.Black)
+                                .padding(
+                                    top = (Math.min(
+                                        40f,
+                                        0.4f * (Math.max(0.0f, 40 - connection.total * 0.2f))
+                                    )).dp, bottom = 0.dp
+                                )
 
                             //    .verticalScroll(state = rememberScrollState())
                         )
@@ -127,11 +125,13 @@ class MainActivity : ComponentActivity() {
 
                                     Spacer(Modifier.height(10.dp))
                                     Text(
-                                        modifier = Modifier.border(
-                                            width = 1.dp,
-                                            color = Color.White,
-                                            shape = RoundedCornerShape(4.dp)
-                                        ).padding(horizontal = 4.dp, vertical = 2.dp),
+                                        modifier = Modifier
+                                            .border(
+                                                width = 1.dp,
+                                                color = Color.White,
+                                                shape = RoundedCornerShape(4.dp)
+                                            )
+                                            .padding(horizontal = 4.dp, vertical = 2.dp),
                                         text = "#666 TOP AKTORKI",
                                         style = CustomTypography.SmallInfo,
                                         color = Color.White,
@@ -198,16 +198,22 @@ class MainActivity : ComponentActivity() {
                                         )
                                     }
 
-                                    Column(modifier = Modifier.offset(x = 0.dp, y = 10.dp).padding(bottom = 30.dp)) {
+                                    Column(modifier = Modifier
+                                        .offset(x = 0.dp, y = 10.dp)
+                                        .padding(bottom = 30.dp)) {
                                         Row() {
                                             Text(
                                                 text = "wiek:",
-                                                Modifier.padding(horizontal = 4.dp).weight(0.75f),
+                                                Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .weight(0.75f),
                                                 color = Color.White
                                             )
                                             Text(
                                                 text = "45345",
-                                                Modifier.padding(horizontal = 4.dp).weight(1f),
+                                                Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .weight(1f),
                                                 color = Color.White
                                             )
                                         }
@@ -215,12 +221,16 @@ class MainActivity : ComponentActivity() {
                                         Row() {
                                             Text(
                                                 text = "urodzona:",
-                                                Modifier.padding(horizontal = 4.dp).weight(0.75f),
+                                                Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .weight(0.75f),
                                                 color = Color.White
                                             )
                                             Text(
                                                 text = "5t4gtg",
-                                                Modifier.padding(horizontal = 4.dp).weight(1f),
+                                                Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .weight(1f),
                                                 color = Color.White
                                             )
                                         }
@@ -228,12 +238,16 @@ class MainActivity : ComponentActivity() {
                                         Row() {
                                             Text(
                                                 text = "miejsce urodzenia:",
-                                                Modifier.padding(horizontal = 4.dp).weight(0.75f),
+                                                Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .weight(0.75f),
                                                 color = Color.White
                                             )
                                             Text(
                                                 text = "fger g gfd ",
-                                                Modifier.padding(horizontal = 4.dp).weight(1f),
+                                                Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .weight(1f),
                                                 color = Color.White
                                             )
                                         }
@@ -241,12 +255,16 @@ class MainActivity : ComponentActivity() {
                                         Row() {
                                             Text(
                                                 text = "wzrost:",
-                                                Modifier.padding(horizontal = 4.dp).weight(0.75f),
+                                                Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .weight(0.75f),
                                                 color = Color.White
                                             )
                                             Text(
                                                 text = "45345",
-                                                Modifier.padding(horizontal = 4.dp).weight(1f),
+                                                Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .weight(1f),
                                                 color = Color.White
                                             )
                                         }
@@ -259,26 +277,30 @@ class MainActivity : ComponentActivity() {
                                 if (i == 0) {
                                     stickyHeader {
                                         Column(
-                                            modifier = Modifier.padding(top = 0.dp).width(IntrinsicSize.Max)
-                                                .background(Color.Transparent)
+                                            modifier = Modifier
+                                                .padding(top = 0.dp)
+                                                .fillMaxWidth(1.0f)
                                         ) {
-                                            SomeLayoutRounded(
-                                                name = "" + bookND1.title +
-                                                        ", isss theSame = " + (bookND1 == bookND2),
-
-                                                )
+                                            SomeLayoutRounded()
                                         }
                                     }
                                 } else if (i == 1) {
                                     item {
-                                        Box(Modifier.padding(0.dp).background(Color.White) ) {
-                                            Box(Modifier.padding(16.dp).background(Color.White)) {
+                                        Box(Modifier
+                                            .padding(0.dp)
+                                            .background(Color.White)
+                                            .zIndex(-100.0f) ) {
+                                            Box(Modifier
+                                                .padding(16.dp)
+                                                .background(Color.White)) {
                                                 Text(
-                                                    modifier = Modifier.fillMaxWidth(1.0f).border(
-                                                        width = 1.dp,
-                                                        color = Color.Gray,
-                                                        shape = RoundedCornerShape(5.dp)
-                                                    ).padding(13.dp),
+                                                    modifier = Modifier
+                                                        .fillMaxWidth(1.0f)
+                                                        .border(
+                                                            width = 1.dp,
+                                                            color = Color.Red
+                                                        )
+                                                        .padding(13.dp),
                                                     textAlign = TextAlign.Center,
                                                     text = "#Dupa",
                                                     color = Color.White,
@@ -325,40 +347,42 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun CustomTopHeader(name: String, modifier: Modifier = Modifier) {
-        Greeting(
-            name = name,
-            modifier = Modifier
-                .background(Color.Transparent)
-
-                .padding(
-                    PaddingValues(
-                        top = (10 +
-
-                                if (!connection.headerOffset.isNaN() && connection.headerOffset * 20 + 15 >= 0) {
-                                    15 + connection.headerOffset * 20
-                                } else {
-                                    15.0f
-                                }).dp,
-                        bottom = (10 +
-
-                                if (!connection.headerOffset.isNaN() && connection.headerOffset >= 0) {
-                                    connection.headerOffset * 20
-                                } else {
-                                    0.0f
-                                }).dp,
-                        start = 0.dp,
-                        end = 0.dp
-                    )
-                )
-        )
-    }
+//    @Composable
+//    fun CustomTopHeader(name: String, modifier: Modifier = Modifier) {
+//        Greeting(
+//            name = name,
+//            modifier = Modifier
+//                .background(Color.Transparent)
+//
+//                .padding(
+//                    PaddingValues(
+//                        top = (10 +
+//
+//                                if (!connection.headerOffset.isNaN() && connection.headerOffset * 20 + 15 >= 0) {
+//                                    15 + connection.headerOffset * 20
+//                                } else {
+//                                    15.0f
+//                                }).dp,
+//                        bottom = (10 +
+//
+//                                if (!connection.headerOffset.isNaN() && connection.headerOffset >= 0) {
+//                                    connection.headerOffset * 20
+//                                } else {
+//                                    0.0f
+//                                }).dp,
+//                        start = 0.dp,
+//                        end = 0.dp
+//                    )
+//                )
+//        )
+//    }
 
     @Composable
     fun CustomTopMenu(opacity: Float) {
         Row(modifier = Modifier
-            .height(IntrinsicSize.Min).fillMaxWidth(1.0f).padding(top = 20.dp)) {
+            .height(IntrinsicSize.Min)
+            .fillMaxWidth(1.0f)
+            .padding(top = 20.dp)) {
             Text(modifier = Modifier.alpha(opacity),text = "Anya blabla", color = Color.White)
             Spacer(Modifier.weight(1.0f))
             Text(text = "MENU", color = Color.White)
@@ -384,7 +408,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun SomeLayout(name: String, modifier: Modifier = Modifier) {
-        Column(modifier = Modifier.background(Color.Cyan)
+        Column(modifier = Modifier
+            .background(Color.Cyan)
             .zIndex(-10.0f)) {
 
             Row(
@@ -412,10 +437,23 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun SomeLayoutRounded(name: String, modifier: Modifier = Modifier, color: Color = Color.Cyan) {
-        Box(modifier =
-            Modifier.fillMaxWidth().height(140.dp).paint( painterResource(R.drawable.hm), alignment = Alignment.TopCenter)
-       )
+    fun SomeLayoutRounded() {
+
+        Row(
+            Modifier
+                .fillMaxWidth().background(Color.Transparent)
+                .offset(x = 0.dp, y =80.dp).zIndex(-600.0f),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ){
+            Image(modifier = Modifier.width(80.dp),
+                imageVector = ImageVector.vectorResource(R.drawable.leftpsd),
+                contentDescription = "blargh")
+
+            Image(modifier = Modifier.width(80.dp),
+                imageVector = ImageVector.vectorResource(R.drawable.rightpsd),
+                contentDescription = "blargh")
+        }
+
     }
 
 
@@ -431,7 +469,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun SomeLayoutRoundedPreview() {
         MyApplicationTheme {
-            SomeLayoutRounded("Android")
+            SomeLayoutRounded()
         }
     }
 
