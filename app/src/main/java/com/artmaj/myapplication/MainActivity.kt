@@ -84,7 +84,7 @@ class MainActivity : ComponentActivity() {
                                 .padding(
                                     top = (Math.min(
                                         40f,
-                                        0.4f * (Math.max(0.0f, 40 - connection.total * 0.2f))
+                                        0.4f * (Math.max(0.0f, 40.0f))
                                     )).dp, bottom = 0.dp
                                 )
 
@@ -157,7 +157,7 @@ class MainActivity : ComponentActivity() {
                                         Box(
                                             modifier = Modifier
                                                 .background(
-                                                    color = Color.Gray
+                                                    color = Color.Black
                                                 )
                                                 .clip(
                                                     RoundedCornerShape(
@@ -200,7 +200,7 @@ class MainActivity : ComponentActivity() {
 
                                     Column(modifier = Modifier
                                         .offset(x = 0.dp, y = 10.dp)
-                                        .padding(bottom = 30.dp)) {
+                                        .padding(bottom = 0.dp)) {
                                         Row() {
                                             Text(
                                                 text = "wiek:",
@@ -279,6 +279,7 @@ class MainActivity : ComponentActivity() {
                                         Column(
                                             modifier = Modifier
                                                 .padding(top = 0.dp)
+                                                .offset(x = 0.dp, y = -100.dp)
                                                 .fillMaxWidth(1.0f)
                                         ) {
                                             SomeLayoutRounded()
@@ -287,12 +288,13 @@ class MainActivity : ComponentActivity() {
                                 } else if (i == 1) {
                                     item {
                                         Box(Modifier
-                                            .padding(0.dp)
-                                            .background(Color.White)
-                                            .zIndex(-100.0f) ) {
+                                                .padding(0.dp)
+                                                .background(Color.White)
+                                                .zIndex(-100.0f)
+                                            .offset(0.dp, -100.dp)) {
                                             Box(Modifier
-                                                .padding(16.dp)
-                                                .background(Color.White)) {
+                                                    .padding(16.dp)
+                                                    .background(Color.White)) {
                                                 Text(
                                                     modifier = Modifier
                                                         .fillMaxWidth(1.0f)
@@ -303,7 +305,8 @@ class MainActivity : ComponentActivity() {
                                                         .padding(13.dp),
                                                     textAlign = TextAlign.Center,
                                                     text = "#Dupa",
-                                                    color = Color.White,
+
+                                                    color = Color.Blue,
                                                 )
                                             }
                                         }
@@ -321,7 +324,7 @@ class MainActivity : ComponentActivity() {
                                                         top = 15.dp, bottom = 15.dp,
                                                         start = 10.dp, end = 10.dp
                                                     )
-                                                )
+                                                ).offset(0.dp,-50.dp)
                                                 .background(Color.White)
                                         )
                                     }
@@ -438,22 +441,30 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun SomeLayoutRounded() {
+        Column() {
+            Box(Modifier.height(80.dp).offset(x = 0.dp, y = (80- Math.max(20.0f,connection.total)).dp)
+                    .fillMaxWidth(1.0f).background(Color.Black))
+            Row(
+                Modifier
+                    .fillMaxWidth().background(Color.Transparent)
+                    .offset(x = 0.dp, y = 60.dp).zIndex(-600.0f),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
 
-        Row(
-            Modifier
-                .fillMaxWidth().background(Color.Transparent)
-                .offset(x = 0.dp, y =80.dp).zIndex(-600.0f),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ){
-            Image(modifier = Modifier.width(80.dp),
-                imageVector = ImageVector.vectorResource(R.drawable.leftpsd),
-                contentDescription = "blargh")
+                Image(
+                    modifier = Modifier.width(80.dp),
+                    imageVector = ImageVector.vectorResource(R.drawable.leftpsd),
+                    contentDescription = "blargh"
+                )
 
-            Image(modifier = Modifier.width(80.dp),
-                imageVector = ImageVector.vectorResource(R.drawable.rightpsd),
-                contentDescription = "blargh")
+                Image(
+                    modifier = Modifier.width(80.dp),
+                    imageVector = ImageVector.vectorResource(R.drawable.rightpsd),
+                    contentDescription = "blargh"
+                )
+            }
+
         }
-
     }
 
 
