@@ -279,7 +279,8 @@ class MainActivity : ComponentActivity() {
                                         Column(
                                             modifier = Modifier
                                                 .padding(top = 0.dp)
-                                                .offset(x = 0.dp, y = -100.dp)
+                                                .offset(x = 0.dp, y = -10.dp)
+                                                .height(80.dp)
                                                 .fillMaxWidth(1.0f)
                                         ) {
                                             SomeLayoutRounded()
@@ -289,11 +290,12 @@ class MainActivity : ComponentActivity() {
                                     item {
                                         Box(Modifier
                                                 .padding(0.dp)
-                                                .background(Color.White)
-                                                .zIndex(-100.0f)
-                                            .offset(0.dp, -100.dp)) {
+                                                .background(Color.Yellow)
+                                                .zIndex(-10.0f)
+                                                .offset(0.dp, 0.dp)) {
                                             Box(Modifier
-                                                    .padding(16.dp)
+                                                    .padding(8.dp)
+
                                                     .background(Color.White)) {
                                                 Text(
                                                     modifier = Modifier
@@ -324,7 +326,7 @@ class MainActivity : ComponentActivity() {
                                                         top = 15.dp, bottom = 15.dp,
                                                         start = 10.dp, end = 10.dp
                                                     )
-                                                ).offset(0.dp,-50.dp)
+                                                )
                                                 .background(Color.White)
                                         )
                                     }
@@ -413,6 +415,7 @@ class MainActivity : ComponentActivity() {
     fun SomeLayout(name: String, modifier: Modifier = Modifier) {
         Column(modifier = Modifier
             .background(Color.Cyan)
+            .offset(0.dp, 0.dp)
             .zIndex(-10.0f)) {
 
             Row(
@@ -441,26 +444,48 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun SomeLayoutRounded() {
-        Column() {
-            Box(Modifier.height(80.dp).offset(x = 0.dp, y = (80- Math.max(20.0f,connection.total)).dp)
-                    .fillMaxWidth(1.0f).background(Color.Black))
+        Column(   Modifier
+            .fillMaxWidth()
+            .background(Color.Transparent)
+
+        ) {
+            Box(Modifier
+                    .height(80.dp)
+                    .offset(x = 0.dp, y = (80 - Math.max(20.0f, connection.total)).dp)
+                    .fillMaxWidth(1.0f).alpha(0.5f)
+                    .background(Color.Blue).zIndex(12800.0f))
             Row(
                 Modifier
-                    .fillMaxWidth().background(Color.Transparent)
-                    .offset(x = 0.dp, y = 60.dp).zIndex(-600.0f),
+                    .fillMaxWidth()
+                    .zIndex(-1000.0f)
+                    .height(80.dp)
+                    .background(Color.Transparent)
+                    .offset(x = 0.dp, y = 60.dp)
+                    .zIndex(-1000.0f),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
                 Image(
-                    modifier = Modifier.width(80.dp),
+                    modifier = Modifier.width(80.dp).zIndex(1900.0f),
                     imageVector = ImageVector.vectorResource(R.drawable.leftpsd),
                     contentDescription = "blargh"
                 )
 
                 Image(
-                    modifier = Modifier.width(80.dp),
+                    modifier = Modifier.width(80.dp).zIndex(1900.0f),
                     imageVector = ImageVector.vectorResource(R.drawable.rightpsd),
                     contentDescription = "blargh"
+                )
+            }
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .background(Color.Transparent)
+                    .offset(x = 0.dp, y = 60.dp)
+                    .zIndex(-1600.0f)
+
+            ){
+                Box(Modifier.zIndex(-1600.0f).fillMaxWidth().height(50.dp).background(Color.Transparent)
                 )
             }
 
