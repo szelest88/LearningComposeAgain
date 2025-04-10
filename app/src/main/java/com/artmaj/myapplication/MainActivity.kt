@@ -199,75 +199,15 @@ class MainActivity : ComponentActivity() {
                                     }
 
                                     Column(modifier = Modifier
-                                        .offset(x = 0.dp, y = 10.dp)
-                                        .padding(bottom = 0.dp)) {
-                                        Row() {
-                                            Text(
-                                                text = "wiek:",
-                                                Modifier
-                                                    .padding(horizontal = 4.dp)
-                                                    .weight(0.75f),
-                                                color = Color.White
-                                            )
-                                            Text(
-                                                text = "45345",
-                                                Modifier
-                                                    .padding(horizontal = 4.dp)
-                                                    .weight(1f),
-                                                color = Color.White
-                                            )
-                                        }
+                                            .offset(x = 0.dp, y = 10.dp)
+                                            .padding(bottom = 0.dp)) {
+                                        InfoRow("wiek:", "45345")
 
-                                        Row() {
-                                            Text(
-                                                text = "urodzona:",
-                                                Modifier
-                                                    .padding(horizontal = 4.dp)
-                                                    .weight(0.75f),
-                                                color = Color.White
-                                            )
-                                            Text(
-                                                text = "5t4gtg",
-                                                Modifier
-                                                    .padding(horizontal = 4.dp)
-                                                    .weight(1f),
-                                                color = Color.White
-                                            )
-                                        }
+                                        InfoRow("urodzona:", "5t4gtg")
 
-                                        Row() {
-                                            Text(
-                                                text = "miejsce urodzenia:",
-                                                Modifier
-                                                    .padding(horizontal = 4.dp)
-                                                    .weight(0.75f),
-                                                color = Color.White
-                                            )
-                                            Text(
-                                                text = "fger g gfd ",
-                                                Modifier
-                                                    .padding(horizontal = 4.dp)
-                                                    .weight(1f),
-                                                color = Color.White
-                                            )
-                                        }
+                                        InfoRow("miejsce urodzenia:", "fger g gfd")
 
-                                        Row() {
-                                            Text(
-                                                text = "wzrost:",
-                                                Modifier
-                                                    .padding(horizontal = 4.dp)
-                                                    .weight(0.75f),
-                                                color = Color.White
-                                            )
-                                            Text(
-                                                text = "45345",
-                                                Modifier
-                                                    .padding(horizontal = 4.dp)
-                                                    .weight(1f),
-                                                color = Color.White
-                                            )
-                                        }
+                                        InfoRow("wzrost:", "45345")
                                     }
                                 }
                             }
@@ -349,6 +289,26 @@ class MainActivity : ComponentActivity() {
                 (values.sorted()[(values.size - 1) / 2]).toFloat()
             else
                 ((values.sorted()[values.size / 2] + values.sorted()[values.size / 2 - 1]) / 2.0f)
+        }
+    }
+
+    @Composable
+    private fun InfoRow(label: String, value: String) {
+        Row() {
+            Text(
+                text = label,
+                Modifier
+                    .padding(horizontal = 4.dp)
+                    .weight(0.75f),
+                color = Color.White
+            )
+            Text(
+                text = value,
+                Modifier
+                    .padding(horizontal = 4.dp)
+                    .weight(1f),
+                color = Color.White
+            )
         }
     }
 
@@ -451,7 +411,7 @@ class MainActivity : ComponentActivity() {
         ) {
             Box(Modifier
                     .height(80.dp)
-                    .offset(x = 0.dp, y = (80 - Math.max(20.0f, connection.total)).dp)
+                    .offset(x = 0.dp, y = 60.dp)
                     .fillMaxWidth(1.0f).alpha(0.5f)
                     .background(Color.Blue).zIndex(12800.0f))
             Row(
