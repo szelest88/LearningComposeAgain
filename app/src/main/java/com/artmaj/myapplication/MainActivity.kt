@@ -81,7 +81,7 @@ class MainActivity : ComponentActivity() {
                                 .zIndex(-10.0f)
                                 .background(Color.Black)
                                 .padding(
-                                    top = (40f.coerceAtMost(0.4f * (0.0f.coerceAtLeast(40.0f)))).dp, bottom = 0.dp
+                                    top = 0.dp, bottom = 0.dp
                                 )
 
                             //    .verticalScroll(state = rememberScrollState())
@@ -118,7 +118,7 @@ class MainActivity : ComponentActivity() {
                                         Column(
                                             modifier = Modifier
                                                 .padding(top = 0.dp)
-                                                .offset(x = 0.dp, y = 30.dp)
+                                                .offset(x = 0.dp, y = 0.dp)
                                                 .height(80.dp)
                                                 .fillMaxWidth(1.0f)
                                         ) {
