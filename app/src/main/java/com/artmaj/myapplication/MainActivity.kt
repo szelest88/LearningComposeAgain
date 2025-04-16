@@ -35,7 +35,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -43,8 +42,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.artmaj.myapplication.ui.theme.CustomTypography
+import com.artmaj.myapplication.ui.theme.FilmwebYellow
 import com.artmaj.myapplication.ui.theme.MyApplicationTheme
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 
 val connection = CollapsingAppBarNestedScrollConnection() //initialing nestedScrollConnection here
@@ -68,7 +67,7 @@ class MainActivity : ComponentActivity() {
                     .background(Color.Transparent)
                     .fillMaxWidth(1.0f)) {
 
-                    var dupa = connection.progress * 20
+                    val scaledConnectionProgress = connection.progress * 20
                     Scaffold(
                         modifier = Modifier
                             .fillMaxSize()
@@ -82,16 +81,13 @@ class MainActivity : ComponentActivity() {
                                 .zIndex(-10.0f)
                                 .background(Color.Black)
                                 .padding(
-                                    top = (Math.min(
-                                        40f,
-                                        0.4f * (Math.max(0.0f, 40.0f))
-                                    )).dp, bottom = 0.dp
+                                    top = (40f.coerceAtMost(0.4f * (0.0f.coerceAtLeast(40.0f)))).dp, bottom = 0.dp
                                 )
 
                             //    .verticalScroll(state = rememberScrollState())
                         )
                         {
-                            Log.d("dupa ? = ", "" + dupa)
+                            Log.d("dupa ? = ", "" + scaledConnectionProgress)
 
 
 //                            item {
@@ -112,104 +108,7 @@ class MainActivity : ComponentActivity() {
 //                                )
 //                            }
                             item {
-                                Column(
-                                    modifier = Modifier
-                                        .background(Color.Black)
-                                        .padding(
-                                            top = 0.dp,
-                                            start = 10.dp,
-                                            end = 10.dp,
-                                            bottom = 10.dp
-                                        )
-                                ) {
-
-                                    Spacer(Modifier.height(10.dp))
-                                    Text(
-                                        modifier = Modifier
-                                            .border(
-                                                width = 1.dp,
-                                                color = Color.White,
-                                                shape = RoundedCornerShape(4.dp)
-                                            )
-                                            .padding(horizontal = 4.dp, vertical = 2.dp),
-                                        text = "#666 TOP AKTORKI",
-                                        style = CustomTypography.SmallInfo,
-                                        color = Color.White,
-                                    )
-
-                                    Text(
-                                        "AKTORKA", style = CustomTypography.SmallInfo,
-                                        color = com.artmaj.myapplication.ui.theme.FilmwebYellow,
-                                        modifier = Modifier.padding(top = 25.dp, bottom = 5.dp)
-                                    )
-                                    Text(
-                                        "Anya Taylor-Joy?", style = CustomTypography.Heading1,
-                                        color = Color.White,
-                                        modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
-                                    )
-                                    Text(
-                                        "Anya Josephine Marie Taylor-Joy",
-                                        style = CustomTypography.SemiInfo,
-                                        color = Color.White,
-                                        modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
-                                    )
-                                    Row(modifier = Modifier.padding(top = 10.dp, bottom = 0.dp)) {
-                                        Box(
-                                            modifier = Modifier
-                                                .background(
-                                                    color = Color.Black
-                                                )
-                                                .clip(
-                                                    RoundedCornerShape(
-                                                        topStart = 10.dp,
-                                                        topEnd = 10.dp
-                                                    )
-                                                )
-                                                .height(160.dp)
-                                                .width(120.dp)
-                                        )
-
-                                        { Text(text = "", color = Color.White) }
-
-                                        Box(
-                                            modifier = Modifier
-                                                .background(
-                                                    color = Color.Black
-                                                )
-                                                .clip(
-                                                    RoundedCornerShape(
-                                                        topStart = 20.dp,
-                                                        topEnd = 20.dp
-                                                    )
-                                                )
-                                                .height(150.dp)
-                                                .fillMaxWidth(1.0f)
-                                                .padding(start = 15.dp, end = 15.dp, top = 15.dp),
-
-
-                                            content = {
-                                                Text(
-                                                    text = "Anya Josephine Marie Taylor-Joy urodziła się w Miami na Florydzie jako najmłodsze z sześciorga dzieci. Jej matka ma korzenie afrykańsko-hiszpańsko-angielskie, a w żyłach ojca płynie krew szkocka\"",
-                                                    color = Color.White,
-                                                    style = CustomTypography.MainText,
-                                                    overflow = TextOverflow.Ellipsis
-                                                )
-                                            }
-                                        )
-                                    }
-
-                                    Column(modifier = Modifier
-                                            .offset(x = 0.dp, y = 10.dp)
-                                            .padding(bottom = 0.dp)) {
-                                        InfoRow("wiek:", "45345")
-
-                                        InfoRow("urodzona:", "5t4gtg")
-
-                                        InfoRow("miejsce urodzenia:", "fger g gfd")
-
-                                        InfoRow("wzrost:", "45345")
-                                    }
-                                }
+                                Header()
                             }
 
 
@@ -219,7 +118,7 @@ class MainActivity : ComponentActivity() {
                                         Column(
                                             modifier = Modifier
                                                 .padding(top = 0.dp)
-                                                .offset(x = 0.dp, y = -10.dp)
+                                                .offset(x = 0.dp, y = 30.dp)
                                                 .height(80.dp)
                                                 .fillMaxWidth(1.0f)
                                         ) {
@@ -277,7 +176,7 @@ class MainActivity : ComponentActivity() {
 
                     }
 
-                    CustomTopMenu(1-dupa*0.05f)
+                    CustomTopMenu(1-scaledConnectionProgress*0.05f)
 
 
                 }
@@ -289,6 +188,110 @@ class MainActivity : ComponentActivity() {
                 (values.sorted()[(values.size - 1) / 2]).toFloat()
             else
                 ((values.sorted()[values.size / 2] + values.sorted()[values.size / 2 - 1]) / 2.0f)
+        }
+    }
+
+    @Composable
+    private fun Header() {
+        Column(
+            modifier = Modifier
+                .background(Color.Black)
+                .padding(
+                    top = 0.dp,
+                    start = 10.dp,
+                    end = 10.dp,
+                    bottom = 10.dp
+                )
+        ) {
+
+            Spacer(Modifier.height(10.dp))
+            Text(
+                modifier = Modifier
+                    .border(
+                        width = 1.dp,
+                        color = Color.White,
+                        shape = RoundedCornerShape(4.dp)
+                    )
+                    .padding(horizontal = 4.dp, vertical = 2.dp),
+                text = "#666 TOP AKTORKI",
+                style = CustomTypography.SmallInfo,
+                color = Color.White,
+            )
+
+            Text(
+                "AKTORKA", style = CustomTypography.SmallInfo,
+                color = FilmwebYellow,
+                modifier = Modifier.padding(top = 25.dp, bottom = 5.dp)
+            )
+            Text(
+                "Anya Taylor-Joy?", style = CustomTypography.Heading1,
+                color = Color.White,
+                modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
+            )
+            Text(
+                "Anya Josephine Marie Taylor-Joy",
+                style = CustomTypography.SemiInfo,
+                color = Color.White,
+                modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
+            )
+            Row(modifier = Modifier.padding(top = 10.dp, bottom = 0.dp)) {
+                Box(
+                    modifier = Modifier
+                        .background(
+                            color = Color.Red
+                        )
+                        .clip(
+                            RoundedCornerShape(
+                                topStart = 10.dp,
+                                topEnd = 10.dp
+                            )
+                        )
+                        .height(160.dp)
+                        .width(120.dp)
+                )
+
+                { Text(text = "", color = Color.White) }
+
+                Box(
+                    modifier = Modifier
+                        .background(
+                            color = Color.Black
+                        )
+                        .clip(
+                            RoundedCornerShape(
+                                topStart = 20.dp,
+                                topEnd = 20.dp
+                            )
+                        )
+                        .height(150.dp)
+                        .fillMaxWidth(1.0f)
+                        .padding(start = 15.dp, end = 15.dp, top = 15.dp),
+
+
+                    content = {
+                        Text(
+                            text = "Anya Josephine Marie Taylor-Joy urodziła się w Miami na Florydzie jako najmłodsze z sześciorga dzieci. Jej matka ma korzenie afrykańsko-hiszpańsko-angielskie, a w żyłach ojca płynie krew szkocka\"",
+                            color = Color.White,
+                            style = CustomTypography.MainText,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                )
+            }
+
+            Column(
+                modifier = Modifier
+                    .offset(x = 0.dp, y = 10.dp)
+                    .padding(bottom = 0.dp)
+            ) {
+                InfoRow("wiek:", "45345")
+
+                InfoRow("urodzona:", "5t4gtg")
+
+                InfoRow("miejsce urodzenia:", "fger g gfd")
+
+                InfoRow("wzrost:", "45345")
+            }
         }
     }
 
@@ -405,34 +408,32 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun SomeLayoutRounded() {
         Column(   Modifier
-            .fillMaxWidth()
-            .background(Color.Transparent)
+            .fillMaxWidth().height(200.dp)
+            .background(Color.Black).offset(x=0.dp, y=50.dp)
 
         ) {
-            Box(Modifier
-                    .height(80.dp)
-                    .offset(x = 0.dp, y = 60.dp)
-                    .fillMaxWidth(1.0f).alpha(0.5f)
-                    .background(Color.Blue).zIndex(12800.0f))
+//            Box(Modifier
+//                    .height(40.dp)
+//                    .offset(x = 0.dp, y = 60.dp)
+//                    .fillMaxWidth(1.0f).alpha(0.5f)
+//                    .background(Color.Blue).zIndex(100.0f)
+//            )
             Row(
-                Modifier
+                Modifier.offset(x = 0.dp, y = 30.dp)
                     .fillMaxWidth()
-                    .zIndex(-1000.0f)
-                    .height(80.dp)
-                    .background(Color.Transparent)
-                    .offset(x = 0.dp, y = 60.dp)
-                    .zIndex(-1000.0f),
+                    .height(40.dp).alpha(1f)
+                    .background(Color.White).zIndex(100.0f),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
                 Image(
-                    modifier = Modifier.width(80.dp).zIndex(1900.0f),
+                    modifier = Modifier.width(40.dp).zIndex(1900.0f),
                     imageVector = ImageVector.vectorResource(R.drawable.leftpsd),
                     contentDescription = "blargh"
                 )
 
                 Image(
-                    modifier = Modifier.width(80.dp).zIndex(1900.0f),
+                    modifier = Modifier.width(40.dp).zIndex(1900.0f),
                     imageVector = ImageVector.vectorResource(R.drawable.rightpsd),
                     contentDescription = "blargh"
                 )
