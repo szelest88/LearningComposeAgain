@@ -9,6 +9,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,9 +22,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
@@ -33,7 +34,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -49,6 +49,7 @@ import androidx.compose.ui.zIndex
 import com.artmaj.myapplication.ui.theme.CustomTypography
 import com.artmaj.myapplication.ui.theme.FilmwebYellow
 import com.artmaj.myapplication.ui.theme.MyApplicationTheme
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 
 val connection = CollapsingAppBarNestedScrollConnection() //initialing nestedScrollConnection here
@@ -129,45 +130,22 @@ class MainActivity : ComponentActivity() {
                                                 .height(80.dp)
                                                 .fillMaxWidth(1.0f)
                                         ) {
-                                            SomeLayoutRounded()
+                                            RoundedLayout()
                                         }
                                     }
                                 } else if (i == 1) {
                                     item {
-                                        Box(
-                                            Modifier
-                                                .padding(0.dp)
-                                                .background(Color.Yellow)
-                                                .zIndex(-10.0f)
-                                                .offset(0.dp, 0.dp)
-                                        ) {
-                                            Box(
-                                                Modifier
-                                                    .padding(8.dp)
-
-                                                    .background(Color.White)
-                                            ) {
-                                                Text(
-                                                    modifier = Modifier
-                                                        .fillMaxWidth(1.0f)
-                                                        .border(
-                                                            width = 1.dp,
-                                                            color = Color.Red
-                                                        )
-                                                        .padding(13.dp),
-                                                    textAlign = TextAlign.Center,
-                                                    text = "#Dupa",
-
-                                                    color = Color.Blue,
-                                                )
-                                            }
-                                        }
+                                        CheckAwardsListItem()
                                     }
 
 
+                                } else if (i == 2) {
+                                    item {
+                                        KnownForSection()
+                                    }
                                 } else {
                                     item {
-                                        SomeLayout(
+                                        PlaceholderContentLayout(
                                             name = "" + bookND1.title +
                                                     ", is theSame = " + (bookND1 == bookND2),
                                             modifier = Modifier
@@ -187,7 +165,7 @@ class MainActivity : ComponentActivity() {
 
                     }
 
-                    CustomTopMenu(1 - scaledConnectionProgress * 0.05f)
+                    CustomTopAlternativeMenu(1 - scaledConnectionProgress * 0.05f)
 
 
                 }
@@ -199,6 +177,88 @@ class MainActivity : ComponentActivity() {
                 (values.sorted()[(values.size - 1) / 2]).toFloat()
             else
                 ((values.sorted()[values.size / 2] + values.sorted()[values.size / 2 - 1]) / 2.0f)
+        }
+    }
+
+    @Composable
+    private fun CheckAwardsListItem() {
+        Box(
+            Modifier
+                .padding(0.dp)
+                .background(Color.Yellow)
+                .zIndex(-10.0f)
+                .offset(0.dp, 0.dp)
+        ) {
+            Box(
+                Modifier
+                    .padding(8.dp)
+
+                    .background(Color.White)
+            ) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(1.0f)
+                        .border(
+                            width = 1.dp,
+                            color = Color.Red,
+                            shape = RoundedCornerShape(5.dp)
+                        )
+                        .padding(13.dp),
+                    textAlign = TextAlign.Center,
+                    text = "Sprawdź listę nagród i nominacji",
+
+                    color = Color.Blue,
+                )
+            }
+        }
+    }
+
+    @Composable
+    private fun KnownForSection() {
+        val scrollState = rememberScrollState()
+        Column(Modifier.background(Color.White)) {
+            Row(Modifier.background(Color.White).fillMaxWidth(1.0f),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text("Znany z")
+                Text("Więcej")
+            }
+            Row(
+                Modifier
+                    .horizontalScroll(scrollState)
+            ) {
+                for (iterator in 1..20) {
+                    SingleMoviePoster("Blarhg".repeat(iterator))
+                }
+            }
+        }
+    }
+
+    @Composable
+    fun SingleMoviePoster(title: String){
+        Column() {
+            Box(
+                Modifier
+                    .width(90.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .height(120.dp)
+                    .padding(horizontal = 5.dp, vertical = 2.dp)
+                    .background(Color.Red)
+            ) {
+
+            }
+            Text(modifier = Modifier.width(90.dp), maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Center,
+                text = title)
+        }
+    }
+
+    @Preview(widthDp = 300, heightDp = 240)
+    @Composable
+    fun KnownForSectionPreview() {
+        MyApplicationTheme {
+            KnownForSection()
         }
     }
 
@@ -311,13 +371,13 @@ class MainActivity : ComponentActivity() {
                     .offset(x = 0.dp, y = 10.dp)
                     .padding(bottom = 0.dp)
             ) {
-                InfoRow("wiek:", "45345")
+                InfoRow("wiek:", "29 lat")
 
-                InfoRow("urodzona:", "5t4gtg")
+                InfoRow("urodzona:", "16 kwietnia 1996")
 
-                InfoRow("miejsce urodzenia:", "fger g gfd")
+                InfoRow("miejsce urodzenia:", "Miami, Floryda, USA")
 
-                InfoRow("wzrost:", "45345")
+                InfoRow("wzrost:", "173 cm")
             }
         }
     }
@@ -342,38 +402,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-//    @Composable
-//    fun CustomTopHeader(name: String, modifier: Modifier = Modifier) {
-//        Greeting(
-//            name = name,
-//            modifier = Modifier
-//                .background(Color.Transparent)
-//
-//                .padding(
-//                    PaddingValues(
-//                        top = (10 +
-//
-//                                if (!connection.headerOffset.isNaN() && connection.headerOffset * 20 + 15 >= 0) {
-//                                    15 + connection.headerOffset * 20
-//                                } else {
-//                                    15.0f
-//                                }).dp,
-//                        bottom = (10 +
-//
-//                                if (!connection.headerOffset.isNaN() && connection.headerOffset >= 0) {
-//                                    connection.headerOffset * 20
-//                                } else {
-//                                    0.0f
-//                                }).dp,
-//                        start = 0.dp,
-//                        end = 0.dp
-//                    )
-//                )
-//        )
-//    }
 
     @Composable
-    fun CustomTopMenu(opacity: Float) {
+    fun CustomTopAlternativeMenu(opacity: Float) {
         Row(
             modifier = Modifier
                 .height(IntrinsicSize.Min)
@@ -390,21 +421,12 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun CustomTopMenuPreview() {
         MyApplicationTheme {
-            CustomTopMenu(1.0f)
+            CustomTopAlternativeMenu(1.0f)
         }
     }
 
     @Composable
-    fun Greeting(name: String, modifier: Modifier = Modifier) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier,
-            color = Color.White
-        )
-    }
-
-    @Composable
-    fun SomeLayout(name: String, modifier: Modifier = Modifier) {
+    fun PlaceholderContentLayout(name: String, modifier: Modifier = Modifier) {
         Column(
             modifier = Modifier
                 .background(Color.Cyan)
@@ -437,7 +459,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun SomeLayoutRounded() {
+    fun RoundedLayout() {
         Column(
             Modifier
                 .fillMaxWidth()
@@ -505,7 +527,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun SomeLayoutPreview() {
         MyApplicationTheme {
-            SomeLayout("Android")
+            PlaceholderContentLayout("Android")
         }
     }
 
@@ -513,15 +535,8 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun SomeLayoutRoundedPreview() {
         MyApplicationTheme {
-            SomeLayoutRounded()
+            RoundedLayout()
         }
     }
 
-    @Preview(showBackground = true)
-    @Composable
-    fun GreetingPreview() {
-        MyApplicationTheme {
-            Greeting("Android")
-        }
-    }
 }
