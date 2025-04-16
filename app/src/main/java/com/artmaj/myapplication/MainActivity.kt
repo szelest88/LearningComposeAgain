@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -422,7 +423,7 @@ class MainActivity : ComponentActivity() {
                 Modifier.offset(x = 0.dp, y = 30.dp)
                     .fillMaxWidth()
                     .height(40.dp).alpha(1f)
-                    .background(Color.White).zIndex(100.0f),
+                    .background(Color.Transparent).zIndex(100.0f),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
@@ -433,8 +434,8 @@ class MainActivity : ComponentActivity() {
                 )
 
                 Image(
-                    modifier = Modifier.width(40.dp).zIndex(1900.0f),
-                    imageVector = ImageVector.vectorResource(R.drawable.rightpsd),
+                    modifier = Modifier.width(40.dp).zIndex(1900.0f).scale(-1f,1f),
+                    imageVector = ImageVector.vectorResource(R.drawable.leftpsd),
                     contentDescription = "blargh"
                 )
             }
