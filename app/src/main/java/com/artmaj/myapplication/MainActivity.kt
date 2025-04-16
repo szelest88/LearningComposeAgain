@@ -68,9 +68,11 @@ class MainActivity : ComponentActivity() {
         val bookND2 = BookNonData("LOTR", "Tolkien", BookCondition.NEW)
         setContent {
             MyApplicationTheme {
-                Box(modifier = Modifier
-                    .background(Color.Transparent)
-                    .fillMaxWidth(1.0f)) {
+                Box(
+                    modifier = Modifier
+                        .background(Color.Transparent)
+                        .fillMaxWidth(1.0f)
+                ) {
 
                     val scaledConnectionProgress = connection.progress * 20
                     Scaffold(
@@ -132,15 +134,19 @@ class MainActivity : ComponentActivity() {
                                     }
                                 } else if (i == 1) {
                                     item {
-                                        Box(Modifier
+                                        Box(
+                                            Modifier
                                                 .padding(0.dp)
                                                 .background(Color.Yellow)
                                                 .zIndex(-10.0f)
-                                                .offset(0.dp, 0.dp)) {
-                                            Box(Modifier
+                                                .offset(0.dp, 0.dp)
+                                        ) {
+                                            Box(
+                                                Modifier
                                                     .padding(8.dp)
 
-                                                    .background(Color.White)) {
+                                                    .background(Color.White)
+                                            ) {
                                                 Text(
                                                     modifier = Modifier
                                                         .fillMaxWidth(1.0f)
@@ -181,7 +187,7 @@ class MainActivity : ComponentActivity() {
 
                     }
 
-                    CustomTopMenu(1-scaledConnectionProgress*0.05f)
+                    CustomTopMenu(1 - scaledConnectionProgress * 0.05f)
 
 
                 }
@@ -252,13 +258,22 @@ class MainActivity : ComponentActivity() {
 //                        .height(160.dp)
 //                        .width(120.dp)
 //                    }
-                Image(painterResource(R.drawable.lenka),
-                    contentScale =  ContentScale.FillHeight,
+                Image(
+                    painterResource(R.drawable.lenka),
+                    contentScale = ContentScale.FillHeight,
                     contentDescription = null,
-                    modifier = Modifier.clip( RoundedCornerShape(
-                            10.dp
-                        )).width(120.dp).height(160.dp).background(
-                        color = Color.Red))
+                    modifier = Modifier
+                        .clip(
+                            RoundedCornerShape(
+                                10.dp
+                            )
+                        )
+                        .width(120.dp)
+                        .height(160.dp)
+                        .background(
+                            color = Color.Red
+                        )
+                )
 
 
 
@@ -359,11 +374,13 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun CustomTopMenu(opacity: Float) {
-        Row(modifier = Modifier
-            .height(IntrinsicSize.Min)
-            .fillMaxWidth(1.0f)
-            .padding(top = 20.dp)) {
-            Text(modifier = Modifier.alpha(opacity),text = "Anya blabla", color = Color.White)
+        Row(
+            modifier = Modifier
+                .height(IntrinsicSize.Min)
+                .fillMaxWidth(1.0f)
+                .padding(top = 20.dp)
+        ) {
+            Text(modifier = Modifier.alpha(opacity), text = "Anya blabla", color = Color.White)
             Spacer(Modifier.weight(1.0f))
             Text(text = "MENU", color = Color.White)
         }
@@ -388,10 +405,12 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun SomeLayout(name: String, modifier: Modifier = Modifier) {
-        Column(modifier = Modifier
-            .background(Color.Cyan)
-            .offset(0.dp, 0.dp)
-            .zIndex(-10.0f)) {
+        Column(
+            modifier = Modifier
+                .background(Color.Cyan)
+                .offset(0.dp, 0.dp)
+                .zIndex(-10.0f)
+        ) {
 
             Row(
                 modifier = Modifier.fillMaxWidth(1.0f),
@@ -419,9 +438,12 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun SomeLayoutRounded() {
-        Column(   Modifier
-            .fillMaxWidth().height(200.dp)
-            .background(Color.Black).offset(x=0.dp, y=50.dp)
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .background(Color.Black)
+                .offset(x = 0.dp, y = 50.dp)
 
         ) {
 //            Box(Modifier
@@ -431,21 +453,29 @@ class MainActivity : ComponentActivity() {
 //                    .background(Color.Blue).zIndex(100.0f)
 //            )
             Row(
-                Modifier.offset(x = 0.dp, y = 30.dp)
+                Modifier
+                    .offset(x = 0.dp, y = 30.dp)
                     .fillMaxWidth()
-                    .height(40.dp).alpha(1f)
-                    .background(Color.Transparent).zIndex(100.0f),
+                    .height(40.dp)
+                    .alpha(1f)
+                    .background(Color.Transparent)
+                    .zIndex(100.0f),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
                 Image(
-                    modifier = Modifier.width(40.dp).zIndex(1900.0f),
+                    modifier = Modifier
+                        .width(40.dp)
+                        .zIndex(1900.0f),
                     imageVector = ImageVector.vectorResource(R.drawable.leftpsd),
                     contentDescription = "blargh"
                 )
 
                 Image(
-                    modifier = Modifier.width(40.dp).zIndex(1900.0f).scale(-1f,1f),
+                    modifier = Modifier
+                        .width(40.dp)
+                        .zIndex(1900.0f)
+                        .scale(-1f, 1f),
                     imageVector = ImageVector.vectorResource(R.drawable.leftpsd),
                     contentDescription = "blargh"
                 )
@@ -457,8 +487,13 @@ class MainActivity : ComponentActivity() {
                     .offset(x = 0.dp, y = 60.dp)
                     .zIndex(-1600.0f)
 
-            ){
-                Box(Modifier.zIndex(-1600.0f).fillMaxWidth().height(50.dp).background(Color.Transparent)
+            ) {
+                Box(
+                    Modifier
+                        .zIndex(-1600.0f)
+                        .fillMaxWidth()
+                        .height(50.dp)
+                        .background(Color.Transparent)
                 )
             }
 
