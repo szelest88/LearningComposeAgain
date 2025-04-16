@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,10 +33,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -236,22 +240,29 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
             )
             Row(modifier = Modifier.padding(top = 10.dp, bottom = 0.dp)) {
-                Box(
-                    modifier = Modifier
-                        .background(
-                            color = Color.Red
-                        )
-                        .clip(
-                            RoundedCornerShape(
-                                topStart = 10.dp,
-                                topEnd = 10.dp
-                            )
-                        )
-                        .height(160.dp)
-                        .width(120.dp)
-                )
+//                Box(
+//                    modifier = with(Modifier) {
+//                        paint(parentActivityIntent)
+//                        .clip(
+//                        RoundedCornerShape(
+//                            topStart = 10.dp,
+//                            topEnd = 10.dp
+//                        )
+//                    )
+//                        .height(160.dp)
+//                        .width(120.dp)
+//                    }
+                Image(painterResource(R.drawable.lenka),
+                    contentScale =  ContentScale.FillHeight,
+                    contentDescription = null,
+                    modifier = Modifier.clip( RoundedCornerShape(
+                            10.dp
+                        )).width(120.dp).height(160.dp).background(
+                        color = Color.Red))
 
-                { Text(text = "", color = Color.White) }
+
+
+
 
                 Box(
                     modifier = Modifier
